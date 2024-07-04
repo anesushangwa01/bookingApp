@@ -1,0 +1,23 @@
+
+
+    <article>
+      <img
+        class="listing-photo"
+        [src]="booking?.photo"
+        alt="Exterior photo of {{ booking?.name }}"
+        crossorigin
+      />
+      <section class="listing-description">
+        <h2 class="listing-heading">{{ booking?.name }}</h2>
+        <p class="listing-location">{{ booking?.city }}, {{ booking?.state }}</p>
+      </section>
+      <section class="listing-features">
+        <h2 class="section-heading">About this Hotel</h2>
+        <ul>
+          <li>Units available: {{ booking?.availableUnits }}</li>
+          <li>Does this location have wifi: {{ booking?.wifi }}</li>
+          <li>Does this location have laundry: {{ booking?.laundry }}</li>
+        </ul>
+      </section>
+    </article>
+ 

@@ -5,6 +5,8 @@
       </form>
     </section>
     <section class="results">
-<app-booking-details [booking]="booking"></app-booking-details>
+<app-booking-details 
+*ngFor = "let booking of bookings"
+[booking]="booking"></app-booking-details>
     </section>
-    
+   

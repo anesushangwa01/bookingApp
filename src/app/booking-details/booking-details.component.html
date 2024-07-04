@@ -8,4 +8,7 @@
     />
     <h2 class="listing-heading">{{ booking.name }}</h2>
     <p class="listing-location">{{ booking.city }}, {{ booking.state }}</p>
+    <a [routerLink]="['/viewdetails', booking.id]">Learn More</a>
   </section>
+
+  
