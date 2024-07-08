@@ -5,6 +5,9 @@
     border-radius: 30px;
     float: right;
   }
+ img{
+  width: 100%;
+ }
   .listing-heading {
     font-size: 48pt;
     font-weight: bold;
@@ -48,7 +51,7 @@
     font-size: 16pt;
     margin-bottom: 15px;
     padding: 10px;
-    width: 400px;
+    width: 100%;
     border-top: none;
     border-right: none;
     border-left: none;
@@ -59,4 +62,9 @@
       width: 100%;
       height: 400px;
     }
+  }
+
+  main{
+    display: grid;
+    grid-template-columns:  1fr 1fr ;
   }

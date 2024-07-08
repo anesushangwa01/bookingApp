@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { booking } from '../bookAppmodel';
+// import { booking } from '../bookAppmodel';
 import { RouterOutlet , RouterLink, RouterModule} from '@angular/router';
+
 
 @Component({
   selector: 'app-booking-details',
@@ -10,6 +11,6 @@ import { RouterOutlet , RouterLink, RouterModule} from '@angular/router';
   styleUrl: './booking-details.component.css'
 })
 export class BookingDetailsComponent {
-  @Input() booking!: booking;
+  @Input() booking!: any;
   
 }

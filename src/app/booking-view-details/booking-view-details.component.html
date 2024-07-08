@@ -1,23 +1,75 @@
 
 
+<div class="container">
+  <section class="listing-description">
+    <h2 class="listing-heading" style="text-align: center;">{{ booking?.name }}</h2>
+    <p class="listing-location" style="text-align: center;">{{ booking?.city }}, {{ booking?.state }}</p>
+  </section>
     <article>
+      <div>
       <img
-        class="listing-photo"
+      
         [src]="booking?.photo"
         alt="Exterior photo of {{ booking?.name }}"
         crossorigin
       />
-      <section class="listing-description">
-        <h2 class="listing-heading">{{ booking?.name }}</h2>
-        <p class="listing-location">{{ booking?.city }}, {{ booking?.state }}</p>
-      </section>
+      <div style="text-align: center;">    <p> {{booking?.discription}}</p></div>
+    </div>
+     
+      <main>
       <section class="listing-features">
         <h2 class="section-heading">About this Hotel</h2>
         <ul>
           <li>Units available: {{ booking?.availableUnits }}</li>
           <li>Does this location have wifi: {{ booking?.wifi }}</li>
           <li>Does this location have laundry: {{ booking?.laundry }}</li>
+          <li>Total cost: $ {{ booking?.amount }}</li>
         </ul>
+  
       </section>
+
+      <section class="listing-apply">
+        <h2 class="section-heading">Apply now to live here</h2>
+        <form [formGroup]="applyForm" (submit)="submitApplication()">
+          <label for="first-name">First Name</label>
+          <input id="first-name" type="text" formControlName="firstName" />
+          
+          <label for="last-name">Last Name</label>
+          <input id="last-name" type="text" formControlName="lastName" />
+          
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" />
+          <input type="hidden" formControlName="hotelName" [value]="booking?.name" />
+
+          <label for="hotel-name">Hotel Name</label>
+          <input id="hotel-name" type="text" [value]="booking?.name" disabled />
+          <label for="check-in-date">Check-in Date</label>
+          <input id="check-in-date" type="date" formControlName="checkInDate" />
+          
+          <label for="check-out-date">Check-out Date</label>
+          <input id="check-out-date" type="date" formControlName="checkOutDate" />
+          
+          <label for="number-of-guests">Number of Guests</label>
+          <input id="number-of-guests" type="number" formControlName="numberOfGuests" />
+          
+          <label for="room-type">Room Type</label>
+          <select id="room-type" formControlName="roomType">
+            <option value="single">Single</option>
+            <option value="double">Double</option>
+            <option value="suite">Suite</option>
+          </select>
+          
+          <label for="number-of-rooms">Number of Rooms</label>
+          <input id="number-of-rooms" type="number" formControlName="numberOfRooms" />
+          
+          <label for="special-requests">Special Requests</label>
+          <textarea id="special-requests" formControlName="specialRequests"></textarea>
+          <br>
+          
+          <button type="submit" class="primary">Apply now</button>
+        </form>
+      </section>
+    </main>
+      
     </article>
- 
+  </div>
