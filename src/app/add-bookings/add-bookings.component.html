@@ -1,3 +1,5 @@
+<div class="container">
+
 <section class="listing-apply">
   <h2 class="section-heading">Apply now to add a booking</h2>
   <form [formGroup]="applyForm" (submit)="submitApplication()">
@@ -10,8 +12,16 @@
     <label for="state">State</label>
     <input id="state" type="text" formControlName="state" />
 
-    <label for="photo">Photo URL</label>
-    <input id="photo" type="text" formControlName="photo" />
+    <label for="photo">Photo1 URL</label>
+    <input id="photo" type="text" formControlName="photo1" />
+    <label for="photo">Photo2 URL</label>
+    <input id="photo" type="text" formControlName="photo2" />
+    <label for="photo">Photo3 URL</label>
+    <input id="photo" type="text" formControlName="photo3" />
+    <label for="photo">Photo4 URL</label>
+    <input id="photo" type="text" formControlName="photo4" />
+    <label for="photo">Photo5 URL</label>
+    <input id="photo" type="text" formControlName="photo5" />
 
     <label for="availableUnits">Available Units</label>
     <input id="availableUnits" type="number" formControlName="availableUnits" />
@@ -39,10 +49,11 @@
     <div *ngFor="let booking of bookings">
       <h3>{{ booking.name }}</h3>
       <p>{{ booking.city }}, {{ booking.state }}</p>
-      <img [src]="booking.photo" alt="{{ booking.name }}" />
+      <img [src]="booking.photo1" alt="{{ booking.name }}" />
       <p>Available Units: {{ booking.availableUnits }}</p>
       <p>WiFi: {{ booking.wifi ? 'Yes' : 'No' }}</p>
       <p>Laundry: {{ booking.laundry ? 'Yes' : 'No' }}</p>
       <p>Amount: ${{ booking.amount }}</p>
       <p>{{ booking.discription }}</p>
     </div>
+

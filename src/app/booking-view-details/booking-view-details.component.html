@@ -7,12 +7,46 @@
   </section>
     <article>
       <div>
-      <img
+      <!-- <img
       
         [src]="booking?.photo"
         alt="Exterior photo of {{ booking?.name }}"
         crossorigin
-      />
+      /> -->
+ 
+
+      <div class="grid-container">
+        <div class="grid-item large">
+          <img   [src]="booking?.photo1"
+          alt="Exterior photo of {{ booking?.name }}"
+          crossorigin >
+        </div>
+        <div class="grid-item">
+          <img [src]="booking?.photo2"
+          alt="Exterior photo of {{ booking?.name }}"
+          crossorigin>
+        </div>
+        <div class="grid-item">
+          <img  [src]="booking?.photo3"
+          alt="Exterior photo of {{ booking?.name }}"
+          crossorigin>
+        </div>
+        <div class="grid-item">
+          <img  [src]="booking?.photo4"
+          alt="Exterior photo of {{ booking?.name }}"
+          crossorigin>
+        </div>
+        <div class="grid-item">
+          <img  [src]="booking?.photo5"
+          alt="Exterior photo of {{ booking?.name }}"
+          crossorigin>
+        </div>
+      </div>
+
+
+
+
+
       <div style="text-align: center;">    <p> {{booking?.discription}}</p></div>
     </div>
      
