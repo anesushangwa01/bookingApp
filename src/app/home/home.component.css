@@ -11,33 +11,45 @@
     align-items: center;
   }
  .cover{
-  background: rgba(255, 255, 255, 0.7);
+  /* background: rgba(255, 255, 255, 0.7);
   width: 100%;
-  height: 100%;
+  height: 100%; */
+ 
  }
 
  .move{
 margin-top: 13%;
 
+
+ }
+ .bk{
+ padding: 9px;
+ 
  }
   .containers {
     text-align: center;
   
   
     padding: 20px;
-
     opacity: 0;
     animation: fadeIn 2s forwards;
+  }
+  .move{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   h1 {
     font-size: 3em;
-    color: #333;
+
+   color: white;
     margin: 0;
   }
 
   p {
     font-size: 1.5em;
+ 
+    color: black;
   
   }
   

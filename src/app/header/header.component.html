@@ -1,17 +1,31 @@
 <nav class="navbar navbar-expand-lg bg-warning">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Booking App</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" [routerLink]="['/']"> Home </a>
-          <a class="nav-link active" [routerLink]="['categories']"> hotels </a>
-  
-          <a class="nav-link" href="#">Airplane</a>
-          <a class="nav-link " >Taxi</a>
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Booking App</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="navbarNavAltMarkup"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]="isCollapsed">
+      <div class="navbar-nav me-auto">
+        <a class="nav-link active" [routerLink]="['/']">Home</a>
+        <a class="nav-link active" [routerLink]="['/categories']">Hotels</a>
+        <a class="nav-link" href="#">Airplane</a>
+        <a class="nav-link">Taxi</a>
+      </div>
+      
+      <div class="navbar-nav ms-auto" *ngIf="user">
+        <app-google-auth></app-google-auth>
+      </div>
+
+      <div class="navbar-nav ms-auto" *ngIf="!user">
+        <button type="button" class="btn btn-primary" (click)="login()">Login with Google</button>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

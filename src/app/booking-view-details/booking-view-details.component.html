@@ -100,7 +100,10 @@
           <textarea id="special-requests" formControlName="specialRequests"></textarea>
           <br>
           
-          <button type="submit" class="primary">Apply now</button>
+          <button type="submit" [disabled]="loading" class="btn btn-outline-primary">
+            Submit
+            <span *ngIf="loading" class="spinner"></span>
+          </button>
         </form>
       </section>
     </main>

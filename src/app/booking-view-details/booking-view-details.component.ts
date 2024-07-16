@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../booking.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,10 +13,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class BookingViewDetailsComponent {
   booking: any;
+  loading: boolean = false;
   
   constructor(
     private route: ActivatedRoute,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private router: Router
   ) {}
 
   applyForm = new FormGroup({
@@ -29,7 +31,7 @@ export class BookingViewDetailsComponent {
     roomType: new FormControl('', Validators.required),
     numberOfRooms: new FormControl('', [Validators.required, Validators.min(1)]),
     specialRequests: new FormControl(''),
-    hotelName: new FormControl('')  // Add hotel name to the form
+    hotelName: new FormControl('')  
   });
 
   ngOnInit(): void {
@@ -59,6 +61,8 @@ export class BookingViewDetailsComponent {
 
   submitApplication() {
     if (this.applyForm.valid) {
+      this.loading = true; // Set loading to true
+
       this.bookingService.applyHotel({
         firstName: this.applyForm.value.firstName,
         lastName: this.applyForm.value.lastName,
@@ -74,14 +78,17 @@ export class BookingViewDetailsComponent {
         response => {
           console.log('Application submitted successfully', response);
           this.applyForm.reset();
+          this.loading = false; // Reset loading flag
+          this.router.navigate(['/bookinginfo']); // Navigate to booking info page
         },
         error => {
           console.error('Error submitting application', error);
+          this.loading = false; // Reset loading flag
         }
       );
     } else {
       console.error('Form is not valid');
-      this.applyForm.markAllAsTouched();  // Optionally mark all form fields as touched to display validation messages
+      this.applyForm.markAllAsTouched(); 
     }
   }
 }

@@ -1,0 +1,16 @@
+<div class="navbar-nav ms-auto" *ngIf="user">
+    <div ngbDropdown class="d-inline-block">
+      <button type="button" class="btn btn-outline-primary" id="dropdownUser" ngbDropdownToggle>
+        Welcome, {{ user.username }}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownUser" style="padding: 3px;">
+        <p>{{ user.email }}</p>
+        <button ngbDropdownItem (click)="logout()">Logout</button>
+  
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!user">
+    <button type="button" class="btn btn-primary" (click)="login()">Login with Google</button>
+  </div>
