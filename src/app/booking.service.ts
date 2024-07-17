@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class BookingService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'https://bookingback-01.onrender.com';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
@@ -43,7 +43,7 @@ export class BookingService {
   }
 
   login() {
-    const redirectUri = encodeURIComponent('http://localhost:4200');
+    const redirectUri = encodeURIComponent('https://booking02.netlify.app');
     window.location.href = `${this.baseUrl}/auth/google?redirect_uri=${redirectUri}`;
   }
 
