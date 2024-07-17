@@ -13,7 +13,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class BookingViewDetailsComponent {
   booking: any;
+  user: any;
   loading: boolean = false;
+
+
+  
+
   
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +28,7 @@ export class BookingViewDetailsComponent {
 
   applyForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
+    // lastName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     checkInDate: new FormControl('', Validators.required),
     checkOutDate: new FormControl('', Validators.required),
@@ -43,6 +48,18 @@ export class BookingViewDetailsComponent {
         console.error('Booking ID is null.');
       }
     });
+
+    this.bookingService.user$.subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        this.applyForm.patchValue({
+          firstName: this.user.username,
+          email: this.user.email
+        });
+      }
+    });
+
+    this.bookingService.isAuthenticated().subscribe();
   }
 
   fetchBookingDetails(bookingId: string): void {
@@ -65,7 +82,7 @@ export class BookingViewDetailsComponent {
 
       this.bookingService.applyHotel({
         firstName: this.applyForm.value.firstName,
-        lastName: this.applyForm.value.lastName,
+        // lastName: this.applyForm.value.lastName,
         email: this.applyForm.value.email,
         hotelName: this.applyForm.value.hotelName,
         checkInDate: this.applyForm.value.checkInDate,
@@ -79,7 +96,11 @@ export class BookingViewDetailsComponent {
           console.log('Application submitted successfully', response);
           this.applyForm.reset();
           this.loading = false; // Reset loading flag
-          this.router.navigate(['/bookinginfo']); // Navigate to booking info page
+          this.router.navigate(['/bookinginfo'],
+            {
+              queryParams: { message: 'Application submitted successfully!' }
+            });
+          // Navigate to booking info page
         },
         error => {
           console.error('Error submitting application', error);

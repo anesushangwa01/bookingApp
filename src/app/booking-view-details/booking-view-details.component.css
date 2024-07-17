@@ -58,6 +58,9 @@
     border-bottom: solid .3px;
   }
 
+  #special-requests{
+    width: 100%;
+  }
 
   .grid-container {
     display: grid;

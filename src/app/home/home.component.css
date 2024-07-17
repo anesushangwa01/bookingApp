@@ -1,35 +1,22 @@
 
 
   .background {
-    background-image: url('https://cdn.pixabay.com/photo/2018/08/06/19/49/design-3588214_1280.jpg'); /* Replace with your image URL */
+    background-image: url('https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg'); /* Replace with your image URL */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
+height: 70vh;
+  
     align-items: center;
   }
- .cover{
-  /* background: rgba(255, 255, 255, 0.7);
-  width: 100%;
-  height: 100%; */
- 
- }
-
- .move{
-margin-top: 13%;
 
 
- }
- .bk{
- padding: 9px;
- 
- }
+
+
+
   .containers {
     text-align: center;
-  
-  
+
     padding: 20px;
     opacity: 0;
     animation: fadeIn 2s forwards;
@@ -41,22 +28,41 @@ margin-top: 13%;
 
   h1 {
     font-size: 3em;
+    color: white;
+  
 
-   color: white;
     margin: 0;
   }
 
   p {
     font-size: 1.5em;
- 
-    color: black;
+    color: #111B21;;
   
   }
+  .cover{
+  margin-top: 30px;
   
+  }
+  .cover, p{
+    text-align: center ;
+    font-size: larger;
+   }
+  .center{
+    text-align: center;
+    
+  }
+  .cover2{
+    background-color: #0005;
+    height: 70vh;
+  }
 
   @keyframes fadeIn {
     to {
       opacity: 1;
     }
   }
-  
+  @media (max-width: 900px) {
+
+ 
+    
+  }

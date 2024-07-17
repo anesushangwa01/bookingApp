@@ -66,25 +66,24 @@ getBookings(): Observable<any> {
 // getBookings(): Observable<any> {
 //   return this.http.get<any>(`${this.baseUrl}`);
 // }
-  isAuthenticated(): Observable<boolean> {
-    return this.http.get<{ isAuthenticated: boolean, user: any }>(`${this.baseUrl}/auth/status`, { withCredentials: true })
-      .pipe(
-        tap(response => {
-          if (response.isAuthenticated) {
-            this.userSubject.next(response.user);
-            localStorage.setItem('user', JSON.stringify(response.user));
-          } else {
-            this.userSubject.next(null);
-            localStorage.removeItem('user');
-          }
-        }),
-        map(response => response.isAuthenticated),
-        catchError(() => {
-          return throwError('Not authenticated');
-        })
-      );
-  }
-
+isAuthenticated(): Observable<boolean> {
+  return this.http.get<{ isAuthenticated: boolean, user: any }>(`${this.baseUrl}/auth/status`, { withCredentials: true })
+    .pipe(
+      tap(response => {
+        if (response.isAuthenticated) {
+          this.userSubject.next(response.user);
+          localStorage.setItem('user', JSON.stringify(response.user));
+        } else {
+          this.userSubject.next(null);
+          localStorage.removeItem('user');
+        }
+      }),
+      map(response => response.isAuthenticated),
+      catchError(() => {
+        return throwError('Not authenticated');
+      })
+    );
+}
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

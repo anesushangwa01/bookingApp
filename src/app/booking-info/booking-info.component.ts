@@ -12,10 +12,11 @@ import { Router } from '@angular/router';
   styleUrl: './booking-info.component.css'
 })
 export class BookingInfoComponent {
-
+  successMessage: string | null = null;
   bookings: any[] = [];
+  showMessage: boolean = false;
 
-  constructor(private bookingService: BookingService, private router: Router) { }
+  constructor(private bookingService: BookingService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.bookingService.getBookings().subscribe(
@@ -27,7 +28,29 @@ export class BookingInfoComponent {
         this.router.navigate(['/login']);
       }
     );
+
+   
+
+
+
+    this.route.queryParams.subscribe(params => {
+      this.successMessage = params['message'] || null;
+      if (this.successMessage) {
+        this.showMessage = true;
+
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 2000); 
+      }
+    });
   }
 
+  closeMessage() {
+    this.showMessage = false;
+  }
+  }
+
+
   
-}
+  
+
