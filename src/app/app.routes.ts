@@ -15,7 +15,7 @@ export const routes: Routes = [
 {path: 'booking', component: BookingDetailsComponent,  canActivate:[AuthGuard]},
 {path:'categories', component: BookingCategoriesComponent, canActivate:[AuthGuard]  }
 ,  { path: 'viewdetails/:id', component: BookingViewDetailsComponent, canActivate:[AuthGuard] },
-{path:'addbookings', component: AddBookingsComponent, canActivate:[AuthGuard]},
+{path:'addbookings', component: AddBookingsComponent},
 {path:'googleauth', component: GoogleAuthComponent},
 {path:'bookinginfo', component: BookingInfoComponent, canActivate:[AuthGuard]}
 
