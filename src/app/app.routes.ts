@@ -13,13 +13,13 @@ export const routes: Routes = [
 {path:'header', component: HeaderComponent},
 {path:'', component: HomeComponent},
 {path: 'booking', component: BookingDetailsComponent},
-{path:'categories', component: BookingCategoriesComponent, canActivate:[AuthGuard]  }
+{path:'categories', component: BookingCategoriesComponent  }
 ,  { path: 'viewdetails/:id', component: BookingViewDetailsComponent,  },
 {path:'addbookings', component: AddBookingsComponent},
 {path:'googleauth', component: GoogleAuthComponent},
-{path:'bookinginfo', component: BookingInfoComponent, canActivate:[AuthGuard]}
+{path:'bookinginfo', component: BookingInfoComponent}
 
 
-
+// , canActivate:[AuthGuard]
 
 ];
