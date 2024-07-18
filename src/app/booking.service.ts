@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
+// http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
   private baseUrl = 'https://bookingback-01.onrender.com';
 

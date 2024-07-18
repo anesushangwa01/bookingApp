@@ -26,6 +26,8 @@ export class HeaderComponent {
     this.bookingService.isAuthenticated().subscribe();
   }
 
+  
+
   logout() {
     this.bookingService.logout();
   }
