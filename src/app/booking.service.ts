@@ -44,7 +44,7 @@ export class BookingService {
   }
 
   login() {
-    const redirectUri = encodeURIComponent('https://booking02.netlify.app');
+    const redirectUri = encodeURIComponent('https://bookingapk.netlify.app');
     window.location.href = `${this.baseUrl}/auth/google?redirect_uri=${redirectUri}`;
   }
 
