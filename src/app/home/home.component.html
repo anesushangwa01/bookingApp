@@ -42,7 +42,16 @@
 
 
 
-		
+		  <div *ngIf="isLoading">Loading user info...</div>
+		  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+		  <div *ngIf="user && !isLoading">
+			<h2>User Profile</h2>
+			<p><strong>Username:</strong> {{ user.username }}</p>
+			<p><strong>Email:</strong> {{ user.email }}</p>
+		  </div>
+		  <div *ngIf="!user && !isLoading">
+			<p>No user info available. Please log in.</p>
+		  </div>
 	
 
   

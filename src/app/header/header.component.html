@@ -19,10 +19,9 @@
         <a class="nav-link" href="#">Airplane</a>
         <a class="nav-link">Taxi</a>
       </div>
-      
-      <div class="navbar-nav ms-auto" *ngIf="user">
+  
         <app-google-auth></app-google-auth>
-      </div>
+      
 
       <div class="navbar-nav ms-auto" *ngIf="!user">
         <button type="button" class="btn btn-primary" (click)="login()">Login with Google</button>
