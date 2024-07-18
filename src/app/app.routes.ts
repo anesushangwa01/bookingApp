@@ -12,9 +12,9 @@ import { BookingInfoComponent } from './booking-info/booking-info.component';
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
 {path:'', component: HomeComponent},
-{path: 'booking', component: BookingDetailsComponent,  canActivate:[AuthGuard]},
+{path: 'booking', component: BookingDetailsComponent},
 {path:'categories', component: BookingCategoriesComponent, canActivate:[AuthGuard]  }
-,  { path: 'viewdetails/:id', component: BookingViewDetailsComponent, canActivate:[AuthGuard] },
+,  { path: 'viewdetails/:id', component: BookingViewDetailsComponent,  },
 {path:'addbookings', component: AddBookingsComponent},
 {path:'googleauth', component: GoogleAuthComponent},
 {path:'bookinginfo', component: BookingInfoComponent, canActivate:[AuthGuard]}
