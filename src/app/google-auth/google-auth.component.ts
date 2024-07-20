@@ -11,7 +11,7 @@ import { NgbDropdown,  NgbDropdownModule , NgbCollapseModule} from '@ng-bootstra
   styleUrl: './google-auth.component.css'
 })
 export class GoogleAuthComponent {
-  constructor(private auth:  BookingService) { }
+  constructor(private bookingService:  BookingService) { }
 
   
   @Input() auths!: any;
@@ -19,19 +19,28 @@ export class GoogleAuthComponent {
   user: any;
 
    
+  // ngOnInit() {
+  //   this.auth.user$.subscribe(user => {
+  //     this.user = user;
+  //   });
+  //   this.auth.isAuthenticated().subscribe();
+  // }
+
+
   ngOnInit() {
-    this.auth.user$.subscribe(user => {
+    this.bookingService.user$.subscribe(user => {
       this.user = user;
     });
-    this.auth.isAuthenticated().subscribe();
+
+  
   }
   login() {
-    this.auth.login();
+    this.bookingService.login();
 
   }
 
   logout() {
-    this.auth.logout();
+    this.bookingService.logout();
   }
 
 }

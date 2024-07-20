@@ -42,7 +42,14 @@
 
 
 
-		
+		  <div *ngIf="isAuthenticated; else notAuthenticated">
+			<h1>Welcome, {{ user?.username }}!</h1>
+			<p>Email: {{ user?.email }}</p>
+		  </div>
+		  <ng-template #notAuthenticated>
+			<h1>You are not authenticated</h1>
+		  </ng-template>
+		`
 	
 
   

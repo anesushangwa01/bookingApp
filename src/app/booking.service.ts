@@ -71,20 +71,27 @@ isAuthenticated(): Observable<boolean> {
   return this.http.get<{ isAuthenticated: boolean, user: any }>(`${this.baseUrl}/auth/status`, { withCredentials: true })
     .pipe(
       tap(response => {
+        console.log('Auth status response:', response); // Debugging log
         if (response.isAuthenticated) {
           this.userSubject.next(response.user);
           localStorage.setItem('user', JSON.stringify(response.user));
+          console.log('User saved to localStorage:', response.user); // Debugging log
         } else {
           this.userSubject.next(null);
           localStorage.removeItem('user');
+          console.log('User not authenticated, localStorage cleared'); // Debugging log
         }
       }),
       map(response => response.isAuthenticated),
-      catchError(() => {
+      catchError(error => {
+        this.userSubject.next(null);
+        localStorage.removeItem('user');
+        console.log('Error occurred, localStorage cleared'); // Debugging log
         return throwError('Not authenticated');
       })
     );
 }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
