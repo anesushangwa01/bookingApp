@@ -27,20 +27,20 @@ export class GoogleAuthComponent {
   // }
 
 
-  ngOnInit() {
-    this.bookingService.user$.subscribe(user => {
-      this.user = user;
-    });
+  // ngOnInit() {
+  //   this.bookingService.user$.subscribe(user => {
+  //     this.user = user;
+  //   });
 
   
-  }
-  login() {
-    this.bookingService.login();
+  // }
+  // login() {
+  //   this.bookingService.login();
 
-  }
+  // }
 
-  logout() {
-    this.bookingService.logout();
-  }
+  // logout() {
+  //   this.bookingService.logout();
+  // }
 
 }

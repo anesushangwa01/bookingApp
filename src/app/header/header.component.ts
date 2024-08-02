@@ -19,21 +19,21 @@ export class HeaderComponent {
   constructor(private bookingService: BookingService) {}
   
 
-  ngOnInit() {
-    this.bookingService.user$.subscribe(user => {
-      this.user = user;
-    });
-    this.bookingService.isAuthenticated().subscribe();
-  }
+  // ngOnInit() {
+  //   this.bookingService.user$.subscribe(user => {
+  //     this.user = user;
+  //   });
+  //   this.bookingService.isAuthenticated().subscribe();
+  // }
 
   
 
-  logout() {
-    this.bookingService.logout();
-  }
-  login() {
-    this.bookingService.login();
-  }
+  // logout() {
+  //   this.bookingService.logout();
+  // }
+  // login() {
+  //   this.bookingService.login();
+  // }
 
 
 

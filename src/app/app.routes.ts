@@ -5,9 +5,11 @@ import {BookingDetailsComponent} from './booking-details/booking-details.compone
 import { BookingCategoriesComponent} from './booking-categories/booking-categories.component'
 import { BookingViewDetailsComponent } from './booking-view-details/booking-view-details.component';
 import { AddBookingsComponent } from './add-bookings/add-bookings.component';
-import { AuthGuard } from './auth.guard';
+// import { AuthGuard } from './auth.guard';
 import {GoogleAuthComponent} from './google-auth/google-auth.component'
 import { BookingInfoComponent } from './booking-info/booking-info.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
@@ -17,7 +19,9 @@ export const routes: Routes = [
 ,  { path: 'viewdetails/:id', component: BookingViewDetailsComponent,  },
 {path:'addbookings', component: AddBookingsComponent},
 {path:'googleauth', component: GoogleAuthComponent},
-{path:'bookinginfo', component: BookingInfoComponent}
+{path:'bookinginfo', component: BookingInfoComponent},
+{path:'register', component: RegisterComponent},
+{path:'login', component: LoginComponent},
 
 
 // , canActivate:[AuthGuard]

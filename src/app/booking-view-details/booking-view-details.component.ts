@@ -59,7 +59,7 @@ export class BookingViewDetailsComponent {
       }
     });
 
-    this.bookingService.isAuthenticated().subscribe();
+    // this.bookingService.isAuthenticated().subscribe();
   }
 
   fetchBookingDetails(bookingId: string): void {
