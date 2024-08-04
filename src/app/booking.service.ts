@@ -9,34 +9,35 @@ import { Router } from '@angular/router';
 })
 // http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'https://bookingback-01.onrender.com';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  register( user: any) : Observable<any>{
+  register(user: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/register`, user);
   }
 
-
-
-
-
-
-
-
-  login(credentials: any) : Observable<any> {
+  login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/login`, credentials);
   }
 
-  getProtectedData() {
+  getProtectedData(): Observable<any> {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `${token}`);
+    const headers = new HttpHeaders().set('Authorization',  `Bearer ${token}`);
     return this.http.get(`${this.baseUrl}/protected`, { headers });
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+  getUserInfo(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.baseUrl}/user`, { headers });
+  }
 
 
 
@@ -62,11 +63,20 @@ export class BookingService {
   }
 
   applyHotel(applicationData: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/apply`, applicationData, )
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Handle the case where the token is not available
+      return throwError('Token not found');
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.baseUrl}/apply`, applicationData, { headers })
       .pipe(
         catchError(this.handleError)
       );
   }
+
+
 
   getBookingById(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/booking/${id}`, ).pipe(
@@ -74,48 +84,17 @@ export class BookingService {
     );
   }
 
-  // login() {
-  //   const redirectUri = encodeURIComponent('https://bookingapk.netlify.app');
-  //   window.location.href = `${this.baseUrl}/auth/google?redirect_uri=${redirectUri}`;
-  // }
 
- // Handles logout
-//  logout() {
-//   this.http.get(`${this.baseUrl}/auth/logout`, { withCredentials: true }).subscribe(() => {
-//     this.userSubject.next(null);
-//     localStorage.removeItem('user');
-//     this.router.navigate(['/']); // Redirect to home or login page
-//   });
 // }
 
 getBookings(): Observable<any> {
-  return this.http.get(`${this.baseUrl}/apply`, { withCredentials: true })
+  return this.http.get(`${this.baseUrl}/apply`)
     .pipe(
       catchError(this.handleError)
     );
 }
 
-// getBookings(): Observable<any> {
-//   return this.http.get<any>(`${this.baseUrl}`);
-// }
-// isAuthenticated(): Observable<boolean> {
-//   return this.http.get<{ isAuthenticated: boolean, user: any }>(`${this.baseUrl}/auth/status`, { withCredentials: true })
-//     .pipe(
-//       tap(response => {
-//         if (response.isAuthenticated) {
-//           this.userSubject.next(response.user);
-//           localStorage.setItem('user', JSON.stringify(response.user));
-//         } else {
-//           this.userSubject.next(null);
-//           localStorage.removeItem('user');
-//         }
-//       }),
-//       map(response => response.isAuthenticated),
-//       catchError(() => {
-//         return throwError('Not authenticated');
-//       })
-//     );
-// }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

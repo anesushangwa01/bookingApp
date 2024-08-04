@@ -1,5 +1,5 @@
 
-`
+
 <div class="background">
 	<div class="cover2">
 	
@@ -7,7 +7,7 @@
 		<br><br><br>
 
 			<div  >
-			  <h1>{{ user.username }}<br> Welcome  to <br> Booking App!</h1>
+			  <h1>  {{ userInfo.name }} <br> Welcome  to <br> Booking App!</h1>
 			</div>
 
 		
@@ -30,6 +30,13 @@
 				  Simplify your search and start your journey to finding the perfect home with our 
 				  Booking App today!
 				</h4>
+				<!-- <div *ngIf="userInfo">
+					<h2>User Profile</h2>
+					<p><strong>Name:</strong> {{ userInfo.name }}</p>
+					<p><strong>Email:</strong> {{ userInfo.email }}</p>
+					<button (click)="logout()">Logout</button>
+				  </div> -->
+
 				<div class=" center">
 					<button type="button" class="btn btn-primary">
 					  <a class="nav-link active text-white" [routerLink]="['categories']">Get started</a>

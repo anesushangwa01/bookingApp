@@ -13,7 +13,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class BookingViewDetailsComponent {
   booking: any;
-  user: any;
+  userInfo: any;
   loading: boolean = false;
 
 
@@ -50,11 +50,11 @@ export class BookingViewDetailsComponent {
     });
 
     this.bookingService.user$.subscribe(user => {
-      this.user = user;
-      if (this.user) {
+      this. userInfo = user;
+      if (this. userInfo) {
         this.applyForm.patchValue({
-          firstName: this.user.username,
-          email: this.user.email
+          firstName: this. userInfo.name,
+          email: this. userInfo.email
         });
       }
     });
