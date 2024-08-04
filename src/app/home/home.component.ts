@@ -19,22 +19,9 @@ export class HomeComponent {
   auths: any[] = [];
 
 
-  user: any;
+
 
  
-  // ngOnInit() {
-  //   this.auth.user$.subscribe(user => {
-  //     this.user = user;
-  //   });
-  //   this.auth.isAuthenticated().subscribe({
-  //     next: (isAuthenticated) => {
-  //       console.log('User authenticated:', isAuthenticated);
-  //     },
-  //     error: (err) => {
-  //       console.error('Authentication check failed:', err);
-  //     }
-  //   });
-  // }
 
   userInfo: any;
 
