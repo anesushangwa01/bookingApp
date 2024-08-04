@@ -7,9 +7,11 @@
 		<br><br><br>
 
 		<div *ngIf="userInfo">
-			<h1> {{ userInfo.name }} </h1>
+			<h1> {{ userInfo.name }}  <br> Welcome to <br> Booking App!</h1>
 		  </div>
-		  <h1>  <br> Welcome to <br> Booking App!</h1>
+		  <div *ngIf="!userInfo">
+			<h1>Welcome to <br> Booking App!</h1>
+		  </div>
 
 		
 			</div>
