@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators ,  ReactiveFormsModule} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../booking.service';
 import { Router } from '@angular/router';
@@ -8,12 +7,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule,  ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
+  errorMessage: string = '';
   registerForm: FormGroup;
 
   constructor(private fb: FormBuilder, private registerService: BookingService, private router: Router) {
@@ -32,12 +31,10 @@ export class RegisterComponent {
           this.router.navigate(['/login']); // Redirect to the login route
         },
         error => {
+          this.errorMessage = error.message || 'Registration failed. Please try again.';
           console.error('Registration error', error);
         }
       );
     }
   }
-
-
-
 }

@@ -25,7 +25,7 @@ export class BookingInfoComponent {
       },
       err => {
         console.error('Error fetching bookings', err);
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/login']);
       }
     );
 
