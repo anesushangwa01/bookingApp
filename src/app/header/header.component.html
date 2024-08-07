@@ -2,9 +2,9 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Booking App</a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler cl"
       type="button"
-      (click)="isCollapsed = !isCollapsed"
+      (click)="toggleNavbar()"
       [attr.aria-expanded]="!isCollapsed"
       aria-controls="navbarNavAltMarkup"
       aria-label="Toggle navigation"
@@ -13,13 +13,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]="isCollapsed">
       <div class="navbar-nav me-auto">
-        <a class="nav-link " [routerLink]="['/']">Home</a>
-        <a class="nav-link " [routerLink]="['/categories']">Hotels</a>
-        <a class="nav-link " [routerLink]="['/bookinginfo']">My bookings</a>
-        <a class="nav-link" href="#">Airplane</a>
-        <a class="nav-link">Taxi</a>
+        <a class="nav-link" [routerLink]="['/']" (click)="closeNavbar()">Home</a>
+        <a class="nav-link" [routerLink]="['/categories']" (click)="closeNavbar()">Hotels</a>
+        <a class="nav-link" [routerLink]="['/bookinginfo']" (click)="closeNavbar()">My bookings</a>
+        <a class="nav-link" href="#" (click)="closeNavbar()">Airplane</a>
+        <a class="nav-link" href="#" (click)="closeNavbar()">Taxi</a>
       </div>
-      
+
       <div class="navbar-nav ms-auto">
         <app-google-auth></app-google-auth>
       </div>
