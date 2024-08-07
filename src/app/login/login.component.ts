@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router , ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +14,21 @@ import { RouterModule, Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
+  notificationMessage: string = '';
 
-  constructor(private fb: FormBuilder, private authService: BookingService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: BookingService, private router: Router,    private route: ActivatedRoute) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
-
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['notify']) {
+        this.notificationMessage = 'Please login to access your bookings.';
+      }
+    });
+  }
   onSubmit() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(

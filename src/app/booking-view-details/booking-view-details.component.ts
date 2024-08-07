@@ -49,17 +49,15 @@ export class BookingViewDetailsComponent {
       }
     });
 
-    this.bookingService.user$.subscribe(user => {
-      this. userInfo = user;
-      if (this. userInfo) {
+    this.bookingService.getUserInfo().subscribe(user => {
+      this.userInfo = user;
+      if (this.userInfo) {
         this.applyForm.patchValue({
-          firstName: this. userInfo.name,
-          email: this. userInfo.email
+          firstName: this.userInfo.name,
+          email: this.userInfo.email
         });
       }
     });
-
-    // this.bookingService.isAuthenticated().subscribe();
   }
 
   fetchBookingDetails(bookingId: string): void {
