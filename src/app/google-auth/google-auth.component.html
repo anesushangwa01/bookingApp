@@ -6,6 +6,7 @@
       <div ngbDropdownMenu aria-labelledby="dropdownUser" style="padding: 3px;">
         <p>{{ userInfo.email }}</p>
         <button (click)="logout()">Logout</button>
+        <a class="nav-link " [routerLink]="['/addbookings']">My bookings</a>
   
       </div>
     </div>

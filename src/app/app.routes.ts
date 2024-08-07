@@ -23,7 +23,8 @@ export const routes: Routes = [
 {path:'bookinginfo', component: BookingInfoComponent,canActivate: [AuthGuard]},
 {path:'register', component: RegisterComponent},
 {path:'login', component: LoginComponent},
-{path: 'reset', component: ResetpasswordComponent}
+{path: 'reset', component: ResetpasswordComponent},
+{path: 'addbookings', component: AddBookingsComponent, canActivate: [AuthGuard]},
 
 
 // , canActivate:[AuthGuard]

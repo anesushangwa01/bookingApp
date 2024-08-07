@@ -18,7 +18,13 @@ export class HeaderComponent {
   isCollapsed = true;
   constructor(private bookingService: BookingService) {}
   
+  toggleNavbar() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
+  closeNavbar() {
+    this.isCollapsed = true;
+  }
   // ngOnInit() {
   //   this.bookingService.user$.subscribe(user => {
   //     this.user = user;
