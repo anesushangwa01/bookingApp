@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../booking.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -31,7 +31,11 @@ export class RegisterComponent {
           this.router.navigate(['/login']); // Redirect to the login route
         },
         error => {
-          this.errorMessage = error.message || 'Registration failed. Please try again.';
+          if (error.status === 409) {
+            this.errorMessage = error.error.message; // Use the message from backend
+          } else {
+            this.errorMessage = 'Registration failed. Please try again.';
+          }
           console.error('Registration error', error);
         }
       );

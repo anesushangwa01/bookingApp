@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div *ngIf="errorMessage" class="error-message">
+  <div *ngIf="errorMessage" class="error-message alert alert-danger">
     {{ errorMessage }}
   </div>
   <div class="row justify-content-center">
@@ -29,12 +29,12 @@
                 Password is required
               </div>
             </div>
-            <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">
+            <button type="submit" class="btn  w-100 bg" [disabled]="registerForm.invalid">
               Register
             </button>
           </form>
           <div class="text-center mt-3">
-            <!-- <a class="nav-link" [routerLink]="['/login']">Login</a> -->
+            <a class="nav-link" [routerLink]="['/login']">Click here to login if have an account</a>
           </div>
         </div>
       </div>

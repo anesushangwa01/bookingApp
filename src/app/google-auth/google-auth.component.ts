@@ -65,11 +65,13 @@ export class GoogleAuthComponent {
   //   this.authService.login();
 
   // }
-
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload(); // Refresh the site after navigation
+    });
   }
+  
 
   // logout() {
   //   this.bookingService.logout();
