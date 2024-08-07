@@ -10,6 +10,7 @@ import {GoogleAuthComponent} from './google-auth/google-auth.component'
 import { BookingInfoComponent } from './booking-info/booking-info.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import {ResetpasswordComponent} from './resetpassword/resetpassword.component'
 
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
@@ -22,6 +23,7 @@ export const routes: Routes = [
 {path:'bookinginfo', component: BookingInfoComponent,canActivate: [AuthGuard]},
 {path:'register', component: RegisterComponent},
 {path:'login', component: LoginComponent},
+{path: 'reset', component: ResetpasswordComponent}
 
 
 // , canActivate:[AuthGuard]

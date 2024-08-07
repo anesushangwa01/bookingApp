@@ -23,7 +23,10 @@ export class BookingService {
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/login`, credentials);
   }
-
+  resetPassword(resetData: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/register/reset-password`, resetData);
+  }
+  
   getProtectedData(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization',  `Bearer ${token}`);
