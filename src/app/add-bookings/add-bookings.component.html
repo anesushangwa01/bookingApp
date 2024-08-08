@@ -1,47 +1,118 @@
 <div class="container">
 
-<section class="listing-apply">
-  <h2 class="section-heading">Apply now to add a booking</h2>
-  <form [formGroup]="applyForm" (submit)="submitApplication()">
-    <label for="name">Name</label>
-    <input id="name" type="text" formControlName="name" />
-
-    <label for="city">City</label>
-    <input id="city" type="text" formControlName="city" />
-
-    <label for="state">State</label>
-    <input id="state" type="text" formControlName="state" />
-
-    <label for="photo">Photo1 URL</label>
-    <input id="photo" type="text" formControlName="photo1" />
-    <label for="photo">Photo2 URL</label>
-    <input id="photo" type="text" formControlName="photo2" />
-    <label for="photo">Photo3 URL</label>
-    <input id="photo" type="text" formControlName="photo3" />
-    <label for="photo">Photo4 URL</label>
-    <input id="photo" type="text" formControlName="photo4" />
-    <label for="photo">Photo5 URL</label>
-    <input id="photo" type="text" formControlName="photo5" />
-
-    <label for="availableUnits">Available Units</label>
-    <input id="availableUnits" type="number" formControlName="availableUnits" />
-
-    <label for="wifi">WiFi</label>
-    <input id="wifi" type="checkbox" formControlName="wifi" />
-
-    <label for="laundry">Laundry</label>
-    <input id="laundry" type="checkbox" formControlName="laundry" />
-
-    <label for="amount">Amount</label>
-    <input id="amount" type="number" formControlName="amount" />
-
-    <label for="description">Description</label>
-    <textarea id="description" formControlName="description"></textarea>
-
-    <button type="submit" class="primary">Add Booking</button>
-  </form>
-</section>
-
+  <section class="listing-apply container mt-5">
+    <div *ngIf="errorMessage" class="error-message alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Apply now to add a booking</h3>
+            <form [formGroup]="applyForm" (submit)="submitApplication()">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input id="name" type="text" formControlName="name" class="form-control" />
+                <div *ngIf="applyForm.get('name')!.invalid && applyForm.get('name')!.touched" class="text-danger mt-1">
+                  Name is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="city" class="form-label">City:</label>
+                <input id="city" type="text" formControlName="city" class="form-control" />
+                <div *ngIf="applyForm.get('city')!.invalid && applyForm.get('city')!.touched" class="text-danger mt-1">
+                  City is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="state" class="form-label">State:</label>
+                <input id="state" type="text" formControlName="state" class="form-control" />
+                <div *ngIf="applyForm.get('state')!.invalid && applyForm.get('state')!.touched" class="text-danger mt-1">
+                  State is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="photo1" class="form-label">Photo1 URL:</label>
+                <input id="photo1" type="text" formControlName="photo1" class="form-control" />
+                <div *ngIf="applyForm.get('photo1')!.invalid && applyForm.get('photo1')!.touched" class="text-danger mt-1">
+                  Photo1 URL is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="photo2" class="form-label">Photo2 URL:</label>
+                <input id="photo2" type="text" formControlName="photo2" class="form-control" />
+                <div *ngIf="applyForm.get('photo2')!.invalid && applyForm.get('photo2')!.touched" class="text-danger mt-1">
+                  Photo2 URL is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="photo3" class="form-label">Photo3 URL:</label>
+                <input id="photo3" type="text" formControlName="photo3" class="form-control" />
+                <div *ngIf="applyForm.get('photo3')!.invalid && applyForm.get('photo3')!.touched" class="text-danger mt-1">
+                  Photo3 URL is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="photo4" class="form-label">Photo4 URL:</label>
+                <input id="photo4" type="text" formControlName="photo4" class="form-control" />
+                <div *ngIf="applyForm.get('photo4')!.invalid && applyForm.get('photo4')!.touched" class="text-danger mt-1">
+                  Photo4 URL is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="photo5" class="form-label">Photo5 URL:</label>
+                <input id="photo5" type="text" formControlName="photo5" class="form-control" />
+                <div *ngIf="applyForm.get('photo5')!.invalid && applyForm.get('photo5')!.touched" class="text-danger mt-1">
+                  Photo5 URL is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="availableUnits" class="form-label">Available Units:</label>
+                <input id="availableUnits" type="number" formControlName="availableUnits" class="form-control" />
+                <div *ngIf="applyForm.get('availableUnits')!.invalid && applyForm.get('availableUnits')!.touched" class="text-danger mt-1">
+                  Available Units is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="wifi" class="form-label">WiFi:</label>
+                <input id="wifi" type="checkbox" formControlName="wifi" class="form-check-input" />
+                <div *ngIf="applyForm.get('wifi')!.invalid && applyForm.get('wifi')!.touched" class="text-danger mt-1">
+                  WiFi is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="laundry" class="form-label">Laundry:</label>
+                <input id="laundry" type="checkbox" formControlName="laundry" class="form-check-input" />
+                <div *ngIf="applyForm.get('laundry')!.invalid && applyForm.get('laundry')!.touched" class="text-danger mt-1">
+                  Laundry is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="amount" class="form-label">Amount:</label>
+                <input id="amount" type="number" formControlName="amount" class="form-control" />
+                <div *ngIf="applyForm.get('amount')!.invalid && applyForm.get('amount')!.touched" class="text-danger mt-1">
+                  Amount is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea id="description" formControlName="description" class="form-control"></textarea>
+                <div *ngIf="applyForm.get('description')!.invalid && applyForm.get('description')!.touched" class="text-danger mt-1">
+                  Description is required
+                </div>
+              </div>
+              <button type="submit" class="btn w-100 bg" [disabled]="applyForm.invalid">
+                Add Booking
+              </button>
+            </form>
+            <div class="text-center mt-3">
+              <!-- <a class="nav-link" [routerLink]="['/bookings']">Click here to view existing bookings</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   
 <h2 class="section-heading" style="text-align: center;">Current Bookings</h2>
   <section class="listing-display">

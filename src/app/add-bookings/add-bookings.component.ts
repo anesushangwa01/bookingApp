@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { BookingService } from '../booking.service';
@@ -8,13 +7,14 @@ import { BookingService } from '../booking.service';
 @Component({
   selector: 'app-add-bookings',
   standalone: true,
-  imports: [CommonModule , ReactiveFormsModule ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-bookings.component.html',
-  styleUrl: './add-bookings.component.css'
+  styleUrls: ['./add-bookings.component.css']
 })
-export class AddBookingsComponent {
+export class AddBookingsComponent implements OnInit {
   applyForm: FormGroup;
   bookings: any[] = [];
+  errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private bookingService: BookingService) {
     this.applyForm = this.fb.group({
@@ -49,19 +49,23 @@ export class AddBookingsComponent {
     );
   }
 
-
   submitApplication() {
     if (this.applyForm.valid) {
       this.bookingService.addBooking(this.applyForm.value).subscribe(
         response => {
           console.log('Booking added successfully:', response);
           this.applyForm.reset();
+          this.errorMessage = null;
         },
         error => {
           console.error('Error adding booking:', error);
+          if (error.error && error.error.message) {
+            this.errorMessage = error.error.message;
+          } else {
+            this.errorMessage = 'An error occurred while adding the booking.';
+          }
         }
       );
     }
   }
-
 }
