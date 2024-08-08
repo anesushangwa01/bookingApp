@@ -50,7 +50,7 @@
       <div style="text-align: center;">    <p> {{booking?.discription}}</p></div>
     </div>
      
-      <main>
+    <main>
       <section class="listing-features">
         <h2 class="section-heading">About this Hotel</h2>
         <ul>
@@ -59,50 +59,46 @@
           <li>Does this location have laundry: {{ booking?.laundry }}</li>
           <li>Total cost: $ {{ booking?.amount }}</li>
         </ul>
-  
       </section>
-
 
       <section class="listing-apply">
         <h2 class="section-heading">Apply now to live here</h2>
         <form [formGroup]="applyForm" (submit)="submitApplication()">
-          <label for="first-name"> Full Name</label>
-          <input id="first-name" type="text" formControlName="firstName" [value]=" userInfo?.name" [disabled]="true"  />
+          <label for="first-name">Full Name</label>
+          <input id="first-name" type="text" formControlName="firstName" [value]="userInfo?.name" [disabled]="true" class="form-control" />
 
-          <input id="first-name" type="hidden" formControlName="firstName" [value]=" userInfo?.name"  />
-          
-      
-          
+          <input id="first-name-hidden" type="hidden" formControlName="firstName" [value]="userInfo?.name" />
 
           <label for="email">Email</label>
-          <input id="email" type="hidden" formControlName="email" [value]=" userInfo?.email"  />
-          <input id="email" type="email" formControlName="email" [value]=" userInfo?.email"   />
+          <input id="email-hidden" type="hidden" formControlName="email" [value]="userInfo?.email" />
+          <input id="email" type="email" formControlName="email" [value]="userInfo?.email" class="form-control" />
 
           <input type="hidden" formControlName="hotelName" [value]="booking?.name" />
 
           <label for="hotel-name">Hotel Name</label>
-          <input id="hotel-name" type="text" [value]="booking?.name" disabled />
+          <input id="hotel-name" type="text" [value]="booking?.name" disabled class="form-control" />
+
           <label for="check-in-date">Check-in Date</label>
-          <input id="check-in-date" type="date" formControlName="checkInDate" />
+          <input id="check-in-date" type="date" formControlName="checkInDate" class="form-control" />
           
           <label for="check-out-date">Check-out Date</label>
-          <input id="check-out-date" type="date" formControlName="checkOutDate" />
+          <input id="check-out-date" type="date" formControlName="checkOutDate" class="form-control" />
           
           <label for="number-of-guests">Number of Guests</label>
-          <input id="number-of-guests" type="number" formControlName="numberOfGuests" />
+          <input id="number-of-guests" type="number" formControlName="numberOfGuests" class="form-control" />
           
           <label for="room-type">Room Type</label>
-          <select id="room-type" formControlName="roomType">
+          <select id="room-type" formControlName="roomType" class="form-control">
             <option value="single">Single</option>
             <option value="double">Double</option>
             <option value="suite">Suite</option>
           </select>
           
           <label for="number-of-rooms">Number of Rooms</label>
-          <input id="number-of-rooms" type="number" formControlName="numberOfRooms" />
+          <input id="number-of-rooms" type="number" formControlName="numberOfRooms" class="form-control" />
           
           <label for="special-requests">Special Requests</label>
-          <textarea id="special-requests" formControlName="specialRequests"></textarea>
+          <textarea id="special-requests" formControlName="specialRequests" class="form-control"></textarea>
           <br>
           
           <button type="submit" [disabled]="loading" class="btn btn-outline-primary">
