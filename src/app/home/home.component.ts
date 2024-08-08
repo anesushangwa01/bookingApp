@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterOutlet , RouterLink, RouterModule, Router} from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
@@ -37,8 +37,21 @@ export class HomeComponent {
         // console.error('Error fetching user info:', error);
       }
     );
+    this.onScroll();
   }
-  
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const elements = document.querySelectorAll('.fade-in');
+    const windowHeight = window.innerHeight;
+
+    elements.forEach(element => {
+      const positionFromTop = element.getBoundingClientRect().top;
+
+      if (positionFromTop - windowHeight <= 0) {
+        element.classList.add('visible');
+      }
+    });
+  }
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

@@ -11,6 +11,7 @@ import { BookingInfoComponent } from './booking-info/booking-info.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import {ResetpasswordComponent} from './resetpassword/resetpassword.component'
+import { CommingsoonComponent } from './commingsoon/commingsoon.component';
 
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
@@ -25,6 +26,7 @@ export const routes: Routes = [
 {path:'login', component: LoginComponent},
 {path: 'reset', component: ResetpasswordComponent},
 {path: 'addbookings', component: AddBookingsComponent, canActivate: [AuthGuard]},
+{path: 'comming-soon', component: CommingsoonComponent}
 
 
 // , canActivate:[AuthGuard]
