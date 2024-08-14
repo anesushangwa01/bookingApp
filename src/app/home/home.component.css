@@ -39,6 +39,12 @@ height: 70vh;
     color: #111B21;
   
   }
+  .bcl{
+    background-color: #111B21;
+  padding: 90px;
+border-top-left-radius: 70px;
+border-bottom-right-radius: 70px;
+  }
   .cover{
   margin-top: 30px;
   

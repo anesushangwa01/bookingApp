@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router , RouterModule} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../booking.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 @Component({
   selector: 'app-booking-view-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './booking-view-details.component.html',
   styleUrls: ['./booking-view-details.component.css']
 })
@@ -76,7 +76,7 @@ export class BookingViewDetailsComponent {
 
   submitApplication() {
     if (this.applyForm.valid) {
-      this.loading = true; // Set loading to true
+      this.loading = true; 
 
       this.bookingService.applyHotel({
         firstName: this.applyForm.value.firstName,

@@ -5,6 +5,9 @@
     border-radius: 30px;
     float: right;
   }
+  p{
+    font-size: larger;
+  }
  img{
   width: 100%;
  }

@@ -47,7 +47,7 @@
 
 
 
-      <div style="text-align: center;">    <p> {{booking?.discription}}</p></div>
+      <div style="text-align: center;">    <p> {{booking?.description}}</p></div>
     </div>
      
     <main>
@@ -57,12 +57,21 @@
           <li>Units available: {{ booking?.availableUnits }}</li>
           <li>Does this location have wifi: {{ booking?.wifi }}</li>
           <li>Does this location have laundry: {{ booking?.laundry }}</li>
-          <li>Total cost: $ {{ booking?.amount }}</li>
+          <li>Total cost per night estimate of: $ {{ booking?.amount }} per capita</li>
         </ul>
       </section>
+      <div *ngIf="!userInfo" class="alert alert-warning alert-dismissible text-center">
+       
+        <a class="nav-link  "   [routerLink]="['/login']">login required to start booking <br>
+          click here
+        </a>
 
+        </div>
+        <br><br><br>
+      <div *ngIf="userInfo">
       <section class="listing-apply">
         <h2 class="section-heading">Apply now to live here</h2>
+   
         <form [formGroup]="applyForm" (submit)="submitApplication()">
           <label for="first-name">Full Name</label>
           <input id="first-name" type="text" formControlName="firstName" [value]="userInfo?.name" [disabled]="true" class="form-control" />
@@ -100,13 +109,24 @@
           <label for="special-requests">Special Requests</label>
           <textarea id="special-requests" formControlName="specialRequests" class="form-control"></textarea>
           <br>
-          
-          <button type="submit" [disabled]="loading" class="btn btn-outline-primary">
-            Submit
-            <span *ngIf="loading" class="spinner"></span>
-          </button>
+          <div *ngIf="userInfo">
+            <button type="submit" [disabled]="loading" class="btn btn-outline-primary">
+              Submit
+             
+              <span *ngIf="loading" class="spinner"></span>
+    
+            </button>
+
+             </div>
+             <div *ngIf="!userInfo">
+              <button type="submit" [disabled]="loading" class="btn btn-outline-primary">
+              <a class="nav-link  " style="color:red;"  [routerLink]="['/login']">login to continue</a>
+              </button>
+             </div>
+            
         </form>
       </section>
+    </div>
     </main>
       
     </article>

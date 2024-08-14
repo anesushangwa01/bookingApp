@@ -15,6 +15,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
   notificationMessage: string = '';
+  loading: boolean = false;
 
   constructor(private fb: FormBuilder, private authService: BookingService, private router: Router,    private route: ActivatedRoute) {
     this.loginForm = this.fb.group({
@@ -31,6 +32,7 @@ export class LoginComponent {
   }
   onSubmit() {
     if (this.loginForm.valid) {
+      this.loading = true;
       this.authService.login(this.loginForm.value).subscribe(
         (response: any) => {
           console.log('Login successful', response);
@@ -44,6 +46,7 @@ export class LoginComponent {
             this.errorMessage = error.error.message; // Use the message from backend
           } else {
             this.errorMessage = 'Login failed. Please try again.';
+            this.loading = false;
           }
           console.error('Login error', error);
         }

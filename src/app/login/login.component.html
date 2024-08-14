@@ -43,6 +43,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
+              <span *ngIf="loading" class="spinner"></span>
               Login
             </button>
           </form>
@@ -60,3 +61,4 @@
     </div>
   </div>
 </div>
+<br><br><br>
