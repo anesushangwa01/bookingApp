@@ -128,7 +128,8 @@ h2{
 }
 @media (max-width: 600px) {
 
-  .bcl{padding: 0px;
+  .bcl{padding: 10px;
+   background-color: #111B21;
   }
   
 }
