@@ -49,8 +49,11 @@ export class BookingService {
 
 
 
-
-
+ deleteBooking(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/booking/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 
   getAllBooking(): Observable<any> {

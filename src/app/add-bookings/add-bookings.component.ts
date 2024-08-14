@@ -48,6 +48,15 @@ export class AddBookingsComponent implements OnInit {
       }
     );
   }
+  deleteBooking(id: string) {
+    this.bookingService.deleteBooking(id).subscribe(
+      response => {
+        this.bookings = this.bookings.filter(booking => booking._id !== id);
+        console.log(response.message);
+      },
+      error => this.errorMessage = error
+    );
+  }
 
   submitApplication() {
     if (this.applyForm.valid) {

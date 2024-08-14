@@ -117,14 +117,17 @@
 <h2 class="section-heading" style="text-align: center;">Current Bookings</h2>
   <section class="listing-display">
 
-    <div *ngFor="let booking of bookings">
-      <h3>{{ booking.name }}</h3>
-      <p>{{ booking.city }}, {{ booking.state }}</p>
-      <img [src]="booking.photo1" alt="{{ booking.name }}" />
-      <p>Available Units: {{ booking.availableUnits }}</p>
-      <p>WiFi: {{ booking.wifi ? 'Yes' : 'No' }}</p>
-      <p>Laundry: {{ booking.laundry ? 'Yes' : 'No' }}</p>
-      <p>Amount: ${{ booking.amount }}</p>
-      <p>{{ booking.discription }}</p>
-    </div>
+    <!-- Other content... -->
+<div *ngFor="let booking of bookings">
+  <h3>{{ booking.name }}</h3>
+  <p>{{ booking.city }}, {{ booking.state }}</p>
+  <img [src]="booking.photo1" alt="{{ booking.name }}" />
+  <p>Available Units: {{ booking.availableUnits }}</p>
+  <p>WiFi: {{ booking.wifi ? 'Yes' : 'No' }}</p>
+  <p>Laundry: {{ booking.laundry ? 'Yes' : 'No' }}</p>
+  <p>Amount: ${{ booking.amount }}</p>
+  <p>{{ booking.description }}</p>
+  <button class="btn btn-danger" (click)="deleteBooking(booking._id)">Delete</button>
+</div>
+
 
