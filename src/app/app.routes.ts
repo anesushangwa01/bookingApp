@@ -12,6 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import {ResetpasswordComponent} from './resetpassword/resetpassword.component'
 import { CommingsoonComponent } from './commingsoon/commingsoon.component';
+import  {  ForbiddenComponent}  from  './forbidden/forbidden.component'
+import { Component } from '@angular/core';
 
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
@@ -25,9 +27,9 @@ export const routes: Routes = [
 {path:'register', component: RegisterComponent},
 {path:'login', component: LoginComponent},
 {path: 'reset', component: ResetpasswordComponent},
-{path: 'addbookings', component: AddBookingsComponent, canActivate: [AuthGuard]},
-{path: 'comming-soon', component: CommingsoonComponent}
-
+{path: 'admin', component: AddBookingsComponent,canActivate: [AuthGuard], data: { requiresAdmin: true }},
+{path: 'comming-soon', component: CommingsoonComponent},
+{path: 'forbidden', component:  ForbiddenComponent}
 
 // , canActivate:[AuthGuard]
 

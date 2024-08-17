@@ -34,7 +34,7 @@ export class BookingViewDetailsComponent {
     checkOutDate: new FormControl('', Validators.required),
     numberOfGuests: new FormControl('', [Validators.required, Validators.min(1)]),
     roomType: new FormControl('', Validators.required),
-    numberOfRooms: new FormControl('', [Validators.required, Validators.min(1)]),
+  
     specialRequests: new FormControl(''),
     hotelName: new FormControl('')  
   });
@@ -87,7 +87,6 @@ export class BookingViewDetailsComponent {
         checkOutDate: this.applyForm.value.checkOutDate,
         numberOfGuests: this.applyForm.value.numberOfGuests,
         roomType: this.applyForm.value.roomType,
-        numberOfRooms: this.applyForm.value.numberOfRooms,
         specialRequests: this.applyForm.value.specialRequests
       }).subscribe(
         response => {

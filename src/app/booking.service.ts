@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 // http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
-  private baseUrl = ' http://localhost:3000';
+  private baseUrl = 'https://bookingback-01.onrender.com';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
@@ -49,21 +49,47 @@ export class BookingService {
 
 
 
- deleteBooking(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/booking/${id}`).pipe(
+  deleteBooking(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Handle the case where the token is not available
+      return throwError('Token not found');
+    }
+  
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.baseUrl}/booking/${id}`, { headers }).pipe(
       catchError(this.handleError)
     );
   }
+  
   updateBooking(id: string, booking: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/booking/${id}`, booking);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Handle the case where the token is not available
+      return throwError('Token not found');
+    }
+  
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.baseUrl}/booking/${id}`, booking, { headers }).pipe(
+      catchError(this.handleError)
+    );
   }
+  
 
   getAllBooking(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/booking`, ) // { withCredentials: true }
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Handle the case where the token is not available
+      return throwError('Token not found');
+    }
+  
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.baseUrl}/booking`, { headers })
       .pipe(
         catchError(this.handleError)
       );
   }
+  
 
   addBooking(jobData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/booking`, jobData, )
