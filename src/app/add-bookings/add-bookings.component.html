@@ -1,5 +1,4 @@
 <div class="container">
-
   <section class="listing-apply container mt-5">
     <div *ngIf="errorMessage" class="error-message alert alert-danger">
       {{ errorMessage }}
@@ -8,8 +7,10 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title text-center mb-4">Apply now to add a booking</h3>
-            <form [formGroup]="applyForm" (submit)="submitApplication()">
+            <h3 class="card-title text-center mb-4">{{ isEditMode ? 'Edit Booking' : 'Apply now to add a booking' }}</h3>
+            <form [formGroup]="applyForm" (submit)="isEditMode ? updateBooking() : submitApplication()">
+              
+              <!-- Name -->
               <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
                 <input id="name" type="text" formControlName="name" class="form-control" />
@@ -17,6 +18,8 @@
                   Name is required
                 </div>
               </div>
+              
+              <!-- City -->
               <div class="mb-3">
                 <label for="city" class="form-label">City:</label>
                 <input id="city" type="text" formControlName="city" class="form-control" />
@@ -24,6 +27,8 @@
                   City is required
                 </div>
               </div>
+              
+              <!-- State -->
               <div class="mb-3">
                 <label for="state" class="form-label">State:</label>
                 <input id="state" type="text" formControlName="state" class="form-control" />
@@ -31,6 +36,8 @@
                   State is required
                 </div>
               </div>
+              
+              <!-- Photo1 URL -->
               <div class="mb-3">
                 <label for="photo1" class="form-label">Photo1 URL:</label>
                 <input id="photo1" type="text" formControlName="photo1" class="form-control" />
@@ -38,6 +45,8 @@
                   Photo1 URL is required
                 </div>
               </div>
+              
+              <!-- Photo2 URL -->
               <div class="mb-3">
                 <label for="photo2" class="form-label">Photo2 URL:</label>
                 <input id="photo2" type="text" formControlName="photo2" class="form-control" />
@@ -45,6 +54,8 @@
                   Photo2 URL is required
                 </div>
               </div>
+              
+              <!-- Photo3 URL -->
               <div class="mb-3">
                 <label for="photo3" class="form-label">Photo3 URL:</label>
                 <input id="photo3" type="text" formControlName="photo3" class="form-control" />
@@ -52,6 +63,8 @@
                   Photo3 URL is required
                 </div>
               </div>
+              
+              <!-- Photo4 URL -->
               <div class="mb-3">
                 <label for="photo4" class="form-label">Photo4 URL:</label>
                 <input id="photo4" type="text" formControlName="photo4" class="form-control" />
@@ -59,6 +72,8 @@
                   Photo4 URL is required
                 </div>
               </div>
+              
+              <!-- Photo5 URL -->
               <div class="mb-3">
                 <label for="photo5" class="form-label">Photo5 URL:</label>
                 <input id="photo5" type="text" formControlName="photo5" class="form-control" />
@@ -66,6 +81,8 @@
                   Photo5 URL is required
                 </div>
               </div>
+              
+              <!-- Available Units -->
               <div class="mb-3">
                 <label for="availableUnits" class="form-label">Available Units:</label>
                 <input id="availableUnits" type="number" formControlName="availableUnits" class="form-control" />
@@ -73,6 +90,8 @@
                   Available Units is required
                 </div>
               </div>
+              
+              <!-- WiFi -->
               <div class="mb-3">
                 <label for="wifi" class="form-label">WiFi:</label>
                 <input id="wifi" type="checkbox" formControlName="wifi" class="form-check-input" />
@@ -80,6 +99,8 @@
                   WiFi is required
                 </div>
               </div>
+              
+              <!-- Laundry -->
               <div class="mb-3">
                 <label for="laundry" class="form-label">Laundry:</label>
                 <input id="laundry" type="checkbox" formControlName="laundry" class="form-check-input" />
@@ -87,6 +108,8 @@
                   Laundry is required
                 </div>
               </div>
+              
+              <!-- Amount -->
               <div class="mb-3">
                 <label for="amount" class="form-label">Amount:</label>
                 <input id="amount" type="number" formControlName="amount" class="form-control" />
@@ -94,6 +117,8 @@
                   Amount is required
                 </div>
               </div>
+              
+              <!-- Description -->
               <div class="mb-3">
                 <label for="description" class="form-label">Description:</label>
                 <textarea id="description" formControlName="description" class="form-control"></textarea>
@@ -101,33 +126,32 @@
                   Description is required
                 </div>
               </div>
+              
+              <!-- Submit Button -->
               <button type="submit" class="btn w-100 bg" [disabled]="applyForm.invalid">
-                Add Booking
+                {{ isEditMode ? 'Update Booking' : 'Add Booking' }}
               </button>
             </form>
-            <div class="text-center mt-3">
-              <!-- <a class="nav-link" [routerLink]="['/bookings']">Click here to view existing bookings</a> -->
-            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
-<h2 class="section-heading" style="text-align: center;">Current Bookings</h2>
+
+  <!-- Display Current Bookings -->
+  <h2 class="section-heading" style="text-align: center;">Current Bookings</h2>
   <section class="listing-display">
-
-    <!-- Other content... -->
-<div *ngFor="let booking of bookings">
-  <h3>{{ booking.name }}</h3>
-  <p>{{ booking.city }}, {{ booking.state }}</p>
-  <img [src]="booking.photo1" alt="{{ booking.name }}" />
-  <p>Available Units: {{ booking.availableUnits }}</p>
-  <p>WiFi: {{ booking.wifi ? 'Yes' : 'No' }}</p>
-  <p>Laundry: {{ booking.laundry ? 'Yes' : 'No' }}</p>
-  <p>Amount: ${{ booking.amount }}</p>
-  <p>{{ booking.description }}</p>
-  <button class="btn btn-danger" (click)="deleteBooking(booking._id)">Delete</button>
+    <div *ngFor="let booking of bookings">
+      <h3>{{ booking.name }}</h3>
+      <p>{{ booking.city }}, {{ booking.state }}</p>
+      <img [src]="booking.photo1" alt="{{ booking.name }}" />
+      <p>Available Units: {{ booking.availableUnits }}</p>
+      <p>WiFi: {{ booking.wifi ? 'Yes' : 'No' }}</p>
+      <p>Laundry: {{ booking.laundry ? 'Yes' : 'No' }}</p>
+      <p>Amount: ${{ booking.amount }}</p>
+      <p>{{ booking.description }}</p>
+      <button class="btn btn-warning" (click)="editBooking(booking)">Edit</button>
+      <button class="btn btn-danger" (click)="deleteBooking(booking._id)">Delete</button>
+    </div>
+  </section>
 </div>
-
-

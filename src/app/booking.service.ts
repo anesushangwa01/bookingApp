@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 // http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
-  private baseUrl = 'https://bookingback-01.onrender.com';
+  private baseUrl = ' http://localhost:3000';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
@@ -54,7 +54,9 @@ export class BookingService {
       catchError(this.handleError)
     );
   }
-
+  updateBooking(id: string, booking: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/booking/${id}`, booking);
+  }
 
   getAllBooking(): Observable<any> {
     return this.http.get(`${this.baseUrl}/booking`, ) // { withCredentials: true }

@@ -15,6 +15,8 @@ export class AddBookingsComponent implements OnInit {
   applyForm: FormGroup;
   bookings: any[] = [];
   errorMessage: string | null = null;
+  isEditMode = false;
+  currentBookingId: string | null = null;
 
   constructor(private fb: FormBuilder, private bookingService: BookingService) {
     this.applyForm = this.fb.group({
@@ -48,14 +50,48 @@ export class AddBookingsComponent implements OnInit {
       }
     );
   }
-  deleteBooking(id: string) {
-    this.bookingService.deleteBooking(id).subscribe(
-      response => {
-        this.bookings = this.bookings.filter(booking => booking._id !== id);
-        console.log(response.message);
-      },
-      error => this.errorMessage = error
-    );
+
+  editBooking(booking: any) {
+    this.isEditMode = true;
+    this.currentBookingId = booking._id;
+    this.applyForm.patchValue({
+      name: booking.name,
+      city: booking.city,
+      state: booking.state,
+      photo1: booking.photo1,
+      photo2: booking.photo2,
+      photo3: booking.photo3,
+      photo4: booking.photo4,
+      photo5: booking.photo5,
+      availableUnits: booking.availableUnits,
+      wifi: booking.wifi,
+      laundry: booking.laundry,
+      amount: booking.amount,
+      description: booking.description
+    });
+  }
+
+  updateBooking() {
+    if (this.applyForm.valid) {
+      this.bookingService.updateBooking(this.currentBookingId!, this.applyForm.value).subscribe(
+        response => {
+          console.log('Booking updated successfully:', response);
+          this.applyForm.reset();
+          this.isEditMode = false;
+          this.currentBookingId = null;
+          this.fetchBookings();  // Refresh the list of bookings
+          this.errorMessage = null;
+        },
+        error => {
+          console.error('Error updating booking:', error);
+          if (error.error && error.error.message) {
+            this.errorMessage = error.error.message;
+          } else {
+            this.errorMessage = 'An error occurred while updating the booking.';
+          }
+        }
+      );
+    }
   }
 
   submitApplication() {
@@ -65,6 +101,7 @@ export class AddBookingsComponent implements OnInit {
           console.log('Booking added successfully:', response);
           this.applyForm.reset();
           this.errorMessage = null;
+          this.fetchBookings();  // Refresh the list of bookings
         },
         error => {
           console.error('Error adding booking:', error);
@@ -76,5 +113,15 @@ export class AddBookingsComponent implements OnInit {
         }
       );
     }
+  }
+
+  deleteBooking(id: string) {
+    this.bookingService.deleteBooking(id).subscribe(
+      response => {
+        this.bookings = this.bookings.filter(booking => booking._id !== id);
+        console.log(response.message);
+      },
+      error => this.errorMessage = error
+    );
   }
 }
