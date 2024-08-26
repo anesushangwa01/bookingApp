@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 // http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
-  private baseUrl = 'https://bookingback-01.onrender.com';
+  private baseUrl = ' https://bookingback-01.onrender.com';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
@@ -36,6 +36,14 @@ export class BookingService {
   logout(): void {
     localStorage.removeItem('token');
   }
+
+  getAccountAmount(): Observable<{ amount: number }> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+    });
+    return this.http.get<{ amount: number }>(`${this.baseUrl}/account`, { headers });
+  }
+
   getUserInfo(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

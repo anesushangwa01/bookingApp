@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import {ResetpasswordComponent} from './resetpassword/resetpassword.component'
 import { CommingsoonComponent } from './commingsoon/commingsoon.component';
 import  {  ForbiddenComponent}  from  './forbidden/forbidden.component'
+import { MyaccountComponent} from './myaccount/myaccount.component'
 import { Component } from '@angular/core';
 
 export const routes: Routes = [
@@ -29,7 +30,9 @@ export const routes: Routes = [
 {path: 'reset', component: ResetpasswordComponent},
 {path: 'admin', component: AddBookingsComponent,canActivate: [AuthGuard], data: { requiresAdmin: true }},
 {path: 'comming-soon', component: CommingsoonComponent},
-{path: 'forbidden', component:  ForbiddenComponent}
+{path: 'forbidden', component:  ForbiddenComponent},
+{path:'account', component:  MyaccountComponent}
+
 
 // , canActivate:[AuthGuard]
 

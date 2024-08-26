@@ -3,11 +3,12 @@ import { BookingService } from '../booking.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { MyaccountComponent } from '../myaccount/myaccount.component';
 
 @Component({
   selector: 'app-booking-info',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MyaccountComponent],
   templateUrl: './booking-info.component.html',
   styleUrl: './booking-info.component.css'
 })
