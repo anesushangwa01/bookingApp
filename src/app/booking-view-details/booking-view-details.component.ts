@@ -17,14 +17,12 @@ export class BookingViewDetailsComponent {
   loading: boolean = false;
   totalAmount: number = 0;
 
-  // Room type costs
+  // Costs
   roomCosts = {
     single: 100,
     double: 200,
     suite: 400
   };
-
-  // Cost per additional guest
   guestCost = 50;
 
   applyForm = new FormGroup({
@@ -32,8 +30,8 @@ export class BookingViewDetailsComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     checkInDate: new FormControl('', Validators.required),
     checkOutDate: new FormControl('', Validators.required),
-    numberOfGuests: new FormControl(1, [Validators.required, Validators.min(1)]),
-    roomType: new FormControl('single', Validators.required),
+    numberOfGuests: new FormControl(null, [Validators.required, Validators.min(1)]),  // No default value
+    roomType: new FormControl('', Validators.required),  // No default value
     specialRequests: new FormControl(''),
     hotelName: new FormControl('')
   });
@@ -45,6 +43,7 @@ export class BookingViewDetailsComponent {
   ) {}
 
   ngOnInit(): void {
+    // Fetch booking details and user info
     this.route.paramMap.subscribe(params => {
       const bookingId = params.get('id');
       if (bookingId) {
@@ -62,12 +61,10 @@ export class BookingViewDetailsComponent {
       }
     });
 
-    // Recalculate total amount whenever room type or number of guests changes
-    this.applyForm.get('roomType')?.valueChanges.subscribe(() => this.calculateTotalAmount());
-    this.applyForm.get('numberOfGuests')?.valueChanges.subscribe(() => this.calculateTotalAmount());
-
-    // Calculate the initial total amount
-    this.calculateTotalAmount();
+    // Listen to form changes and recalculate total amount
+    this.applyForm.valueChanges.subscribe(() => {
+      this.calculateTotalAmount();
+    });
   }
 
   fetchBookingDetails(bookingId: string): void {
@@ -84,29 +81,24 @@ export class BookingViewDetailsComponent {
 
   calculateTotalAmount(): void {
     const roomType = this.applyForm.get('roomType')?.value as 'single' | 'double' | 'suite';
-    const numberOfGuests = this.applyForm.get('numberOfGuests')?.value || 1;
-
+    const numberOfGuests = this.applyForm.get('numberOfGuests')?.value || 0;
+  
     const roomCost = this.roomCosts[roomType] || 0;
-    const guestCost = (numberOfGuests - 1) * this.guestCost;
-
+    
+    // Calculate the total guest cost including the first guest
+    const guestCost = numberOfGuests * this.guestCost;
+  
     this.totalAmount = roomCost + guestCost;
   }
 
-  submitApplication(): void {
+  submitApplication() {
     if (this.applyForm.valid) {
-      this.loading = true;
+      this.loading = true; 
 
-      this.bookingService.applyHotel({
-        firstName: this.applyForm.value.firstName,
-        email: this.applyForm.value.email,
-        hotelName: this.applyForm.value.hotelName,
-        checkInDate: this.applyForm.value.checkInDate,
-        checkOutDate: this.applyForm.value.checkOutDate,
-        numberOfGuests: this.applyForm.value.numberOfGuests,
-        roomType: this.applyForm.value.roomType,
-        specialRequests: this.applyForm.value.specialRequests
-      }).subscribe(
+      this.bookingService.applyHotel(this.applyForm.value).subscribe(
         response => {
+          console.log('Application submitted successfully', response);
+          this.applyForm.reset();
           this.loading = false;
           this.router.navigate(['/bookinginfo'], {
             queryParams: { message: 'Application submitted successfully!' }
