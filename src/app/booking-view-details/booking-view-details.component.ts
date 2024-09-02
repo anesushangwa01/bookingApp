@@ -81,14 +81,31 @@ export class BookingViewDetailsComponent {
 
   calculateTotalAmount(): void {
     const roomType = this.applyForm.get('roomType')?.value as 'single' | 'double' | 'suite';
-    const numberOfGuests = this.applyForm.get('numberOfGuests')?.value || 0;
-  
-    const roomCost = this.roomCosts[roomType] || 0;
+const numberOfGuests = this.applyForm.get('numberOfGuests')?.value || 0;
+
+const checkInDateValue = this.applyForm.get('checkInDate')?.value;
+const checkOutDateValue = this.applyForm.get('checkOutDate')?.value;
+
+const checkInDate = checkInDateValue ? new Date(checkInDateValue) : null;
+const checkOutDate = checkOutDateValue ? new Date(checkOutDateValue) : null;
+
+const roomCost = this.roomCosts[roomType] || 0;
+const guestCost = numberOfGuests * this.guestCost;
+const perDayCost = 100;
+
+let dateCost = 0;
+
+if (checkInDate && checkOutDate) {
+  // Calculate the number of days between check-in and check-out dates
+  const timeDifference = checkOutDate.getTime() - checkInDate.getTime();
+  const numberOfDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+  dateCost = numberOfDays * perDayCost;
+}
+
+this.totalAmount = roomCost + guestCost + dateCost;
+
     
-    // Calculate the total guest cost including the first guest
-    const guestCost = numberOfGuests * this.guestCost;
-  
-    this.totalAmount = roomCost + guestCost;
   }
 
   submitApplication() {
