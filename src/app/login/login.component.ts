@@ -37,6 +37,7 @@ export class LoginComponent {
         (response: any) => {
           console.log('Login successful', response);
           localStorage.setItem('token', response.token); // Store the token
+          this.loading= false;
           this.router.navigate(['/']).then(() => {
             window.location.reload(); // Refresh the site after navigation
           });

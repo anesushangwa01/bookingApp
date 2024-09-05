@@ -18,6 +18,7 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class BookingCategoriesComponent {
   bookings: any[] = [];
+  isLoading: boolean = true;
   bookingService: BookingService = inject(BookingService);
 
   constructor() { }
@@ -26,16 +27,19 @@ export class BookingCategoriesComponent {
     this.fetchBookings();
   }
 
-  fetchBookings() {
+   fetchBookings() {
     this.bookingService.getAllBooking().subscribe(
       (data: any[]) => {
         this.bookings = data;
+        this.isLoading = false; // Stop loading once data is fetched
       },
       error => {
         console.error('Error fetching bookings:', error);
+        this.isLoading = false; // Stop loading on error
       }
     );
   }
 }
+
 
 

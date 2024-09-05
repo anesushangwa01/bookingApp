@@ -45,8 +45,8 @@
                 Favorite country is required
               </div>
             </div>
-            <button type="submit" class="btn w-100 bg" [disabled]="registerForm.invalid">
-              Register
+            <button type="submit"  [disabled]="isLoading" class="btn w-100  btn-outline-primary" [disabled]="registerForm.invalid">
+              Register  <span *ngIf="isLoading" class="spinner"></span>
             </button>
           </form>
           <div class="text-center mt-3">

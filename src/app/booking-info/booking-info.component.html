@@ -7,8 +7,11 @@
   </button>
 </div>
 <app-myaccount></app-myaccount>
-
-<div *ngIf="bookings.length > 0; else noBookings">
+<div *ngIf="isLoading" class="loading-spinner">
+        
+  <p>Loading...</p>
+</div>
+<div *ngIf="bookings.length > 0; else noBookings    !isLoading" >
   <table class="table table-striped table-bordered">
     <thead class="thead-dark">
       <tr>
@@ -19,7 +22,7 @@
         <th>Check-out Date</th>
         <th>Number of Guests</th>
         <th>Room Type</th>
-        <th>Number of Rooms</th>
+  
         <th>Special Requests</th>
       </tr>
     </thead>
@@ -32,7 +35,7 @@
         <td>{{ booking.checkOutDate | date }}</td>
         <td>{{ booking.numberOfGuests }}</td>
         <td>{{ booking.roomType }}</td>
-        <td>{{ booking.numberOfRooms }}</td>
+
         <td>{{ booking.specialRequests }}</td>
       </tr>
     </tbody>

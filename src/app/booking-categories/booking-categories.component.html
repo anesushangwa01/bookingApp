@@ -6,8 +6,17 @@
       </form>
     </section>
     <section class="results">
-<app-booking-details 
-*ngFor = "let booking of bookings"
-[booking]="booking"></app-booking-details>
+      <div *ngIf="isLoading" class="loading-spinner">
+        
+        <p>Loading...</p>
+      </div>
+    
+      <ng-container *ngIf="!isLoading">
+        <app-booking-details 
+          *ngFor="let booking of bookings"
+          [booking]="booking">
+        </app-booking-details>
+      </ng-container>
     </section>
+    
   </div>
