@@ -128,8 +128,33 @@ export class BookingService {
     );
   }
 
+ // Admin: Add a new taxi (driver, car type, and hotel partner)
+ addTaxi(taxiData: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/taxi/addTaxi`, taxiData);
+}
 
-// }
+// Fetch available taxis (unbooked)
+getAvailableTaxis(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/taxi/availableTaxis`);
+}
+
+// User: Book a taxi
+bookTaxi(bookingData: any): Observable<any> {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    // Handle the case where the token is not available
+    return throwError('Token not found');
+  }
+
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.post<any>(`${this.baseUrl}/taxi/bookTaxi`, bookingData, { headers })
+    .pipe(
+      catchError(this.handleError)  // Use catchError to handle potential errors
+    );
+}
+
+
+
 
 getBookings(): Observable<any> {
   const token = localStorage.getItem('token');

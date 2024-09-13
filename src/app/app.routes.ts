@@ -15,6 +15,7 @@ import { CommingsoonComponent } from './commingsoon/commingsoon.component';
 import  {  ForbiddenComponent}  from  './forbidden/forbidden.component'
 import { MyaccountComponent} from './myaccount/myaccount.component'
 import { Component } from '@angular/core';
+import {TaxibookingComponent} from './taxibooking/taxibooking.component'
 
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
@@ -31,7 +32,8 @@ export const routes: Routes = [
 {path: 'admin', component: AddBookingsComponent,canActivate: [AuthGuard], data: { requiresAdmin: true }},
 {path: 'comming-soon', component: CommingsoonComponent},
 {path: 'forbidden', component:  ForbiddenComponent},
-{path:'account', component:  MyaccountComponent}
+{path:'account', component:  MyaccountComponent},
+{path: 'taxi', component: TaxibookingComponent}
 
 
 // , canActivate:[AuthGuard]

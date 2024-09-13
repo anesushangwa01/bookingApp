@@ -13,6 +13,7 @@ import { BookingService } from '../booking.service';
 })
 export class AddBookingsComponent implements OnInit {
   applyForm: FormGroup;
+  taxiForm: FormGroup
   bookings: any[] = [];
   errorMessage: string | null = null;
   isEditMode = false;
@@ -33,6 +34,13 @@ export class AddBookingsComponent implements OnInit {
       laundry: [false],
       amount: [0, Validators.required],
       description: ['', Validators.required]
+    });
+
+
+    this.taxiForm = this.fb.group({
+      carType: ['', Validators.required],
+      driverName: ['', Validators.required],
+      hotelPartner: ['', Validators.required]
     });
   }
 
@@ -114,7 +122,15 @@ export class AddBookingsComponent implements OnInit {
       );
     }
   }
-
+  submitTaxiDetails() {
+    if (this.taxiForm.valid) {
+      this. bookingService.addTaxi(this.taxiForm.value).subscribe(response => {
+        console.log('Taxi added', response);
+      }, error => {
+        console.error('Error adding taxi', error);
+      });
+    }
+  }
   deleteBooking(id: string) {
     this.bookingService.deleteBooking(id).subscribe(
       response => {

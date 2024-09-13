@@ -137,24 +137,10 @@
       </div>
     </div>
   </section>
-
-  <!-- Display Current Bookings -->
-  <!-- <h2 class="section-heading" style="text-align: center;">Current Bookings</h2>
-  <section class="listing-display">
-    <div *ngFor="let booking of bookings">
-      <h3>{{ booking.name }}</h3>
-      <p>{{ booking.city }}, {{ booking.state }}</p>
-      <img [src]="booking.photo1" alt="{{ booking.name }}" />
-      <p>Available Units: {{ booking.availableUnits }}</p>
-      <p>WiFi: {{ booking.wifi ? 'Yes' : 'No' }}</p>
-      <p>Laundry: {{ booking.laundry ? 'Yes' : 'No' }}</p>
-      <p>Amount: ${{ booking.amount }}</p>
-      <p>{{ booking.description }}</p>
-      <button class="btn btn-warning" (click)="editBooking(booking)">Edit</button>
-      <button class="btn btn-danger" (click)="deleteBooking(booking._id)">Delete</button>
-    </div>
-  </section> -->
 </div>
+
+
+
 
 <h2 class="section-heading" style="text-align: center;">Current Bookings</h2>
 <div *ngIf="bookings.length > 0; else noBookings" class="container">
@@ -195,4 +181,19 @@
 <ng-template #noBookings>
   <p>No bookings found for you.</p>
 </ng-template>
+
+
+<h2>Admin: Add Driver & Car Details</h2>
+<form [formGroup]="taxiForm" (ngSubmit)="submitTaxiDetails()">
+  <label for="carType">Car Type:</label>
+  <input id="carType" formControlName="carType" type="text" required />
+  
+  <label for="driverName">Driver Name:</label>
+  <input id="driverName" formControlName="driverName" type="text" required />
+  
+  <label for="hotelPartner">Hotel Partner:</label>
+  <input id="hotelPartner" formControlName="hotelPartner" type="text" required />
+
+  <button type="submit">Submit</button>
+</form>
 

@@ -1,0 +1,46 @@
+<div>
+    <h2>Available Taxis</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Type of Car</th>
+          <th>Driver Name</th>
+          <th>Partnered Hotel</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let taxi of availableTaxis">
+          <td>{{ taxi.carType }}</td>
+          <td>{{ taxi.driverName }}</td>
+          <td>{{ taxi.hotelPartner }}</td>
+          <td>{{ taxi.status }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="bookTaxi(taxi)">Book</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Booking Form -->
+    <div *ngIf="selectedTaxi">
+      <h3>Book Taxi</h3>
+      <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
+        <label for="fromLocation">From</label>
+        <input id="fromLocation" formControlName="fromLocation" class="form-control" placeholder="Enter your start location" />
+  
+        <label for="toLocation">To</label>
+        <input id="toLocation" formControlName="toLocation" class="form-control" placeholder="Enter your destination" />
+  
+        <label for="pickupTime">Pickup Time</label>
+        <input id="pickupTime" type="datetime-local" formControlName="pickupTime" class="form-control" />
+  
+        <!-- Display selected taxi details -->
+        <h4>Booking Taxi: {{ selectedTaxi.driverName }} ({{ selectedTaxi.carType }})</h4>
+  
+        <button type="submit" class="btn btn-success">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+  

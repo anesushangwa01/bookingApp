@@ -37,7 +37,7 @@ export class LoginComponent {
         (response: any) => {
           console.log('Login successful', response);
           localStorage.setItem('token', response.token); // Store the token
-          this.loading= false;
+          this.loading= true;
           this.router.navigate(['/']).then(() => {
             window.location.reload(); // Refresh the site after navigation
           });
@@ -47,7 +47,7 @@ export class LoginComponent {
             this.errorMessage = error.error.message; // Use the message from backend
           } else {
             this.errorMessage = 'Login failed. Please try again.';
-            this.loading = false;
+       
           }
           console.error('Login error', error);
         }
