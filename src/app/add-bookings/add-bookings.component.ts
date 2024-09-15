@@ -15,6 +15,7 @@ export class AddBookingsComponent implements OnInit {
   applyForm: FormGroup;
   taxiForm: FormGroup
   bookings: any[] = [];
+  availableTaxis: any[] =[]
   errorMessage: string | null = null;
   isEditMode = false;
   currentBookingId: string | null = null;
@@ -46,6 +47,7 @@ export class AddBookingsComponent implements OnInit {
 
   ngOnInit() {
     this.fetchBookings();
+    this.getAllTaxis();
   }
 
   fetchBookings() {
@@ -102,6 +104,18 @@ export class AddBookingsComponent implements OnInit {
     }
   }
 
+
+    // Fetch the available taxis from the backend
+    getAllTaxis() {
+      this.bookingService.getAvailableTaxis().subscribe(
+        (data) => {
+          this.availableTaxis = data;
+        },
+        (error) => {
+          console.error('Error fetching available taxis:', error);
+        }
+      );
+    }
   submitApplication() {
     if (this.applyForm.valid) {
       this.bookingService.addBooking(this.applyForm.value).subscribe(

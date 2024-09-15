@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { BookingService } from '../booking.service';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-taxibooking',
   standalone: true,
@@ -42,30 +43,41 @@ export class TaxibookingComponent {
     );
   }
 
+
+  
+
   // Handle the selection of a taxi to book
   bookTaxi(taxi: any) {
     this.selectedTaxi = taxi;
     // You can reset or update the form here if needed based on the taxi details
   }
 
-  // Submit the booking form data to the backend
   submitBooking() {
-    // Ensure the form is valid before submitting
-    if (this.bookingForm.invalid) {
-      alert('Please fill in all required fields.');
+    if (this.bookingForm.invalid || !this.selectedTaxi) {
+      alert('Please fill in all required fields and select a taxi.');
       return;
     }
-
+  
+    const userId = this.taxiService.getUserIdFromToken(); // Get the user ID from the token
+  
+    if (!userId) {
+      alert('User not authenticated.');
+      return;
+    }
+  
     const bookingData = {
       ...this.bookingForm.value,
-      taxiId: this.selectedTaxi._id // Include the selected taxi ID in the form data
+      pickupTime: this.bookingForm.value.pickupTime
+        ? new Date(this.bookingForm.value.pickupTime).toISOString()
+        : null,
+      taxiId: this.selectedTaxi._id,
+      userId: userId // Include the user ID in the booking data
     };
-
+  
     this.taxiService.bookTaxi(bookingData).subscribe(
       (response) => {
         console.log('Taxi booked successfully:', response);
         alert('Taxi booked successfully!');
-        // Optionally reset the form and clear the selected taxi
         this.selectedTaxi = null;
         this.bookingForm.reset();
       },

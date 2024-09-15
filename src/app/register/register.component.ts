@@ -43,6 +43,7 @@ export class RegisterComponent {
             this.isLoading = false;
           }
           console.error('Registration error', error);
+          this.isLoading = false;
         }
       );
     }

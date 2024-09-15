@@ -197,3 +197,28 @@
   <button type="submit">Submit</button>
 </form>
 
+
+<div class="container">
+  <h2>Available Taxis</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Type of Car</th>
+        <th>Driver Name</th>
+        <th>Partnered Hotel</th>
+        <th>Status</th>
+    
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let taxi of availableTaxis">
+        <td>{{ taxi.carType }}</td>
+        <td>{{ taxi.driverName }}</td>
+        <td>{{ taxi.hotelPartner }}</td>
+        <td>{{ taxi.status }}</td>
+       
+      </tr>
+    </tbody>
+  </table>
+
+

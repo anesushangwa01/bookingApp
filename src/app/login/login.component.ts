@@ -45,11 +45,14 @@ export class LoginComponent {
         error => {
           if (error.status === 400) {
             this.errorMessage = error.error.message; // Use the message from backend
+            this.loading= false;
           } else {
             this.errorMessage = 'Login failed. Please try again.';
+            this.loading= false;
        
           }
           console.error('Login error', error);
+          this.loading= false;
         }
       );
     }

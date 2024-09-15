@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import jwt_decode from 'jwt-decode';
 import { HttpClient, HttpErrorResponse,  HttpHeaders  } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -15,6 +16,25 @@ export class BookingService {
   user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  getUserIdFromToken(): string | null {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+  
+    const payloadBase64 = token.split('.')[1]; // Get the payload part
+    try {
+      const payload = atob(payloadBase64); // Decode from base64
+      const decodedPayload = JSON.parse(payload);
+      return decodedPayload.userId; // Adjust based on your token structure
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+  
+  
 
   register(user: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/register`, user);
@@ -97,7 +117,7 @@ export class BookingService {
         catchError(this.handleError)
       );
   }
-  
+
 
   addBooking(jobData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/booking`, jobData, )
@@ -136,6 +156,19 @@ export class BookingService {
 // Fetch available taxis (unbooked)
 getAvailableTaxis(): Observable<any[]> {
   return this.http.get<any[]>(`${this.baseUrl}/taxi/availableTaxis`);
+}
+
+getAllTaxis(): Observable<any[]> {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    // Handle the case where the token is not available
+    return throwError('Token not found');
+  }
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<any[]>(`${this.baseUrl}/taxi/all`, { headers });
+  
+    
+  
 }
 
 // User: Book a taxi
