@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 // http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
-  private baseUrl = 'https://bookingback-01.onrender.com';
+  private baseUrl = 'http://localhost:3000';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
@@ -150,8 +150,18 @@ export class BookingService {
 
  // Admin: Add a new taxi (driver, car type, and hotel partner)
  addTaxi(taxiData: any): Observable<any> {
-  return this.http.post(`${this.baseUrl}/taxi/addTaxi`, taxiData);
+  // Assuming you are retrieving the token from localStorage or another storage mechanism
+  const token = localStorage.getItem('token');
+
+  // Setting the Authorization header with the Bearer token
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+
+  // Include the headers in the POST request
+  return this.http.post(`${this.baseUrl}/taxi/addTaxi`, taxiData, { headers });
 }
+
 
 // Fetch available taxis (unbooked)
 getAvailableTaxis(): Observable<any[]> {
