@@ -15,34 +15,54 @@
       /> -->
  
 
-      <div class="grid-container">
-        <div class="grid-item large">
-          <img   [src]="booking?.photo1"
-          alt="Exterior photo of {{ booking?.name }}"
-          crossorigin >
-        </div>
-        <div class="grid-item">
-          <img [src]="booking?.photo2"
-          alt="Exterior photo of {{ booking?.name }}"
-          crossorigin>
-        </div>
-        <div class="grid-item">
-          <img  [src]="booking?.photo3"
-          alt="Exterior photo of {{ booking?.name }}"
-          crossorigin>
-        </div>
-        <div class="grid-item">
-          <img  [src]="booking?.photo4"
-          alt="Exterior photo of {{ booking?.name }}"
-          crossorigin>
-        </div>
-        <div class="grid-item">
-          <img  [src]="booking?.photo5"
-          alt="Exterior photo of {{ booking?.name }}"
-          crossorigin>
+      <div class="container my-4">
+        <div class="row g-3">
+          <!-- First large image -->
+          <div class="col-lg-8">
+            <img
+              [src]="booking?.photo1"
+              class="img-fluid large-image"
+              alt="Large photo of {{ booking?.name }}"
+              crossorigin>
+          </div>
+      
+          <!-- Four smaller images -->
+          <div class="col-lg-4">
+            <div class="row g-3">
+              <div class="col-6">
+                <img
+                  [src]="booking?.photo2"
+                  class="img-fluid small-image"
+                  alt="Small photo of {{ booking?.name }}"
+                  crossorigin>
+              </div>
+              <div class="col-6">
+                <img
+                  [src]="booking?.photo3"
+                  class="img-fluid small-image"
+                  alt="Small photo of {{ booking?.name }}"
+                  crossorigin>
+              </div>
+              <div class="col-6">
+                <img
+                  [src]="booking?.photo4"
+                  class="img-fluid small-image"
+                  alt="Small photo of {{ booking?.name }}"
+                  crossorigin>
+              </div>
+              <div class="col-6">
+                <img
+                  [src]="booking?.photo5"
+                  class="img-fluid small-image"
+                  alt="Small photo of {{ booking?.name }}"
+                  crossorigin>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
+      
+      
 
 
 
@@ -68,57 +88,147 @@
       <br><br><br>
       
       <div *ngIf="userInfo">
-        <section class="listing-apply">
-          <h2 class="section-heading">Apply now to live here</h2>
-    
-          <form [formGroup]="applyForm" (submit)="submitApplication()">
-            <label for="first-name">Full Name</label>
-            <input id="first-name" type="text" formControlName="firstName" [value]="userInfo?.name" [disabled]="true" class="form-control" />
-    
-            <input id="first-name-hidden" type="hidden" formControlName="firstName" [value]="userInfo?.name" />
-    
-            <label for="email">Email</label>
-            <input id="email-hidden" type="hidden" formControlName="email" [value]="userInfo?.email" />
-            <input id="email" type="email" formControlName="email" [value]="userInfo?.email" class="form-control" />
-    
-            <input type="hidden" formControlName="hotelName" [value]="booking?.name" />
-    
-            <label for="hotel-name">Hotel Name</label>
-            <input id="hotel-name" type="text" [value]="booking?.name" disabled class="form-control" />
-    
-            <label for="check-in-date">Check-in Date</label>
-            <input id="check-in-date" type="date" formControlName="checkInDate" class="form-control" />
-            
-            <label for="check-out-date">Check-out Date</label>
-            <input id="check-out-date" type="date" formControlName="checkOutDate" class="form-control" />
-            
-            <label for="number-of-guests">Number of Guests</label>
-            <input id="number-of-guests" type="number" formControlName="numberOfGuests" class="form-control" />
-            
-            <label for="room-type">Room Type</label>
-            <select id="room-type" formControlName="roomType" class="form-control">
-              <option value="single">Single</option>
-              <option value="double">Double</option>
-              <option value="suite">Suite</option>
-            </select>
-    
-            <!-- Display total amount -->
-            <h4>Total Amount: $ {{ totalAmount }}</h4>
-            
-            <label for="special-requests">Special Requests</label>
-            <textarea id="special-requests" formControlName="specialRequests" class="form-control"></textarea>
-    
-            <br>
-            
-            <button type="submit" [disabled]="loading" class="btn btn-outline-primary">
-              Submit
-              <span *ngIf="loading" class="spinner"></span>
-            </button>
-          </form>
-        </section>
-      </div>
-    </main>
-    
-      
-    </article>
-  </div>
+        <div *ngIf="userInfo" class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title text-center mb-4">Apply Now to Live Here</h3>
+        
+                  <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
+                    <!-- Full Name -->
+                    <div class="mb-3">
+                      <label for="first-name" class="form-label">Full Name</label>
+                      <input
+                        id="first-name"
+                        type="text"
+                        formControlName="firstName"
+                        [value]="userInfo?.name"
+                        [disabled]="true"
+                        class="form-control"
+                      />
+                      <input
+                        id="first-name-hidden"
+                        type="hidden"
+                        formControlName="firstName"
+                        [value]="userInfo?.name"
+                      />
+                    </div>
+        
+                    <!-- Email -->
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input
+                        id="email-hidden"
+                        type="hidden"
+                        formControlName="email"
+                        [value]="userInfo?.email"
+                      />
+                      <input
+                        id="email"
+                        type="email"
+                        formControlName="email"
+                        [value]="userInfo?.email"
+                        class="form-control"
+                      />
+                    </div>
+        
+                    <!-- Hotel Name -->
+                    <div class="mb-3">
+                      <label for="hotel-name" class="form-label">Hotel Name</label>
+                      <input
+                        id="hotel-name"
+                        type="text"
+                        [value]="booking?.name"
+                        disabled
+                        class="form-control"
+                      />
+                      <input
+                        type="hidden"
+                        formControlName="hotelName"
+                        [value]="booking?.name"
+                      />
+                    </div>
+        
+                    <!-- Check-in Date -->
+                    <div class="mb-3">
+                      <label for="check-in-date" class="form-label">Check-in Date</label>
+                      <input
+                        id="check-in-date"
+                        type="date"
+                        formControlName="checkInDate"
+                        class="form-control"
+                      />
+                    </div>
+        
+                    <!-- Check-out Date -->
+                    <div class="mb-3">
+                      <label for="check-out-date" class="form-label">Check-out Date</label>
+                      <input
+                        id="check-out-date"
+                        type="date"
+                        formControlName="checkOutDate"
+                        class="form-control"
+                      />
+                    </div>
+        
+                    <!-- Number of Guests -->
+                    <div class="mb-3">
+                      <label for="number-of-guests" class="form-label">Number of Guests</label>
+                      <input
+                        id="number-of-guests"
+                        type="number"
+                        formControlName="numberOfGuests"
+                        class="form-control"
+                      />
+                    </div>
+        
+                    <!-- Room Type -->
+                    <div class="mb-3">
+                      <label for="room-type" class="form-label">Room Type</label>
+                      <select
+                        id="room-type"
+                        formControlName="roomType"
+                        class="form-control"
+                      >
+                        <option value="single">Single</option>
+                        <option value="double">Double</option>
+                        <option value="suite">Suite</option>
+                      </select>
+                    </div>
+        
+                    <!-- Total Amount -->
+                    <h4 class="text-center">Total Amount: ${{ totalAmount }}</h4>
+        
+                    <!-- Special Requests -->
+                    <div class="mb-3">
+                      <label for="special-requests" class="form-label">Special Requests</label>
+                      <textarea
+                        id="special-requests"
+                        formControlName="specialRequests"
+                        class="form-control"
+                        rows="3"
+                      ></textarea>
+                    </div>
+        
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        class="btn btn-outline-primary w-100"
+                        [disabled]="loading || applyForm.invalid"
+                      >
+                        <span *ngIf="loading" class="spinner"></span>
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+        
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
