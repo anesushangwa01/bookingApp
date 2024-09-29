@@ -181,6 +181,20 @@ getAllTaxis(): Observable<any[]> {
   
 }
 
+
+getAllbooked(): Observable<any[]> {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    // Handle the case where the token is not available
+    return throwError('Token not found');
+  }
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<any[]>(`${this.baseUrl}/taxi/booked`, { headers });
+  
+    
+  
+}
+
 // User: Book a taxi
 bookTaxi(bookingData: any): Observable<any> {
   const token = localStorage.getItem('token');

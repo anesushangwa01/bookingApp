@@ -9,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class PartnershipComponent {
 
+  imageSrc = 'assets/etho.png';
+  imageSrc1 = 'assets/indrive.png';
+  imageSrc2 = 'assets/southafrica.png';
+  imageSrc3 = 'assets/uber.png';
+  imageSrc4 = 'assets/zim.png'; // Adjust the path based on your assets folder
+  imageAlt = 'parterners';
+
 }

@@ -16,6 +16,7 @@ import  {  ForbiddenComponent}  from  './forbidden/forbidden.component'
 import { MyaccountComponent} from './myaccount/myaccount.component'
 import { Component } from '@angular/core';
 import {TaxibookingComponent} from './taxibooking/taxibooking.component'
+import { PartnershipComponent } from './partnership/partnership.component';
 
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
@@ -33,7 +34,8 @@ export const routes: Routes = [
 {path: 'comming-soon', component: CommingsoonComponent},
 {path: 'forbidden', component:  ForbiddenComponent},
 {path:'account', component:  MyaccountComponent},
-{path: 'taxi', component: TaxibookingComponent}
+{path: 'taxi', component: TaxibookingComponent},
+{path: 'partners', component: PartnershipComponent}
 
 
 // , canActivate:[AuthGuard]

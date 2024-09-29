@@ -41,6 +41,32 @@
     </tbody>
   </table>
 </div>
+
+<div *ngIf="isLoading">Loading...</div>
+
+<table *ngIf="!isLoading && bookingtax.length > 0" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Taxi</th>
+      <th>From Location</th>
+      <th>To Location</th>
+      <th>Pickup Time</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let booking of bookingtax">
+      <td>{{ booking.taxi?.type || 'N/A' }}</td>
+      <td>{{ booking.fromLocation }}</td>
+      <td>{{ booking.toLocation }}</td>
+      <td>{{ booking.pickupTime | date:'short' }}</td>
+      <td>{{ booking.user?.name || 'N/A' }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!isLoading && bookingtax.length === 0">No taxi bookings  available.</div>
+
 <ng-template #noBookings  >
   <p > No bookings found you.</p>
 </ng-template>

@@ -15,6 +15,7 @@ import { MyaccountComponent } from '../myaccount/myaccount.component';
 export class BookingInfoComponent {
   successMessage: string | null = null;
   bookings: any[] = [];
+  bookingtax: any[] = [];
   isLoading: boolean = true;
   showMessage: boolean = false;
 
@@ -32,6 +33,20 @@ export class BookingInfoComponent {
         // this.router.navigate(['/login']);
       }
     );
+
+
+    this.bookingService.getAllbooked().subscribe(
+      data => {
+        this.bookingtax = data;
+        this.isLoading = false;
+      },
+      err => {
+        console.error('Error fetching bookings', err);
+        this.isLoading = false;
+        // this.router.navigate(['/login']);
+      }
+    );
+
 
    
 
