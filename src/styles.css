@@ -1,5 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+body{
+  font-family: "Play", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .bg{
     background-color: #111B21;
   color: white;
     
+}
+h1 ,h2 ,h3 ,h4,  h6{
+  font-family: "Oleo Script", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }

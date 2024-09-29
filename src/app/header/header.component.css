@@ -1,10 +1,14 @@
 .bg{
-    background-color: #111B21;
+    background-color: #fcf5eb;
 
     
 }
 
 a {
-    color: white;
+    color: black;
+}
+
+a.hover{
+ color: white;
 }
 .cl { background-color: white;}

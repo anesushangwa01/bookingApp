@@ -47,20 +47,22 @@
 <table *ngIf="!isLoading && bookingtax.length > 0" class="table table-striped">
   <thead>
     <tr>
-      <th>Taxi</th>
+      <th>Car</th>
       <th>From Location</th>
       <th>To Location</th>
       <th>Pickup Time</th>
-      <th>User</th>
+      <th>Driver Name</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let booking of bookingtax">
-      <td>{{ booking.taxi?.type || 'N/A' }}</td>
+      <td>{{ booking.
+carType || 'N/A' }}</td>
       <td>{{ booking.fromLocation }}</td>
       <td>{{ booking.toLocation }}</td>
       <td>{{ booking.pickupTime | date:'short' }}</td>
-      <td>{{ booking.user?.name || 'N/A' }}</td>
+      <td>{{ booking.
+driverName || 'N/A' }}</td>
     </tr>
   </tbody>
 </table>

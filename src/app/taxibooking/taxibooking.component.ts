@@ -50,7 +50,7 @@ export class TaxibookingComponent {
   // Handle the selection of a taxi to book
   bookTaxi(taxi: any) {
     this.selectedTaxi = taxi;
-    // You can reset or update the form here if needed based on the taxi details
+   
   }
 
   submitBooking() {
@@ -59,7 +59,7 @@ export class TaxibookingComponent {
       return;
     }
   
-    const userId = this.taxiService.getUserIdFromToken(); // Get the user ID from the token
+    const userId = this.taxiService.getUserIdFromToken();
   
     if (!userId) {
       alert('User not authenticated.');
@@ -72,23 +72,25 @@ export class TaxibookingComponent {
         ? new Date(this.bookingForm.value.pickupTime).toISOString()
         : null,
       taxiId: this.selectedTaxi._id,
-      userId: userId // Include the user ID in the booking data
+      driverName: this.selectedTaxi.driverName,
+      carType: this.selectedTaxi.carType,
+      userId: userId
     };
   
     this.taxiService.bookTaxi(bookingData).subscribe(
       (response) => {
         console.log('Taxi booked successfully:', response);
         alert('Taxi booked successfully!');
-        this.router.navigate(['/bookinginfo']); // Redirect to the my bookingx
-       
+        this.router.navigate(['/bookinginfo']);
         this.selectedTaxi = null;
         this.bookingForm.reset();
       },
       (error) => {
         console.error('Error booking taxi:', error);
-        alert('There was an error booking the taxi.');
+        alert('There was an error booking the taxi: ' + (error?.error?.message || 'Unknown error'));
       }
     );
   }
+  
 
 }
