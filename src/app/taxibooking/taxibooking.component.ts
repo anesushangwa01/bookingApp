@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { BookingService } from '../booking.service';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-taxibooking',
@@ -17,7 +18,7 @@ export class TaxibookingComponent {
   selectedTaxi: any = null; // To store the taxi selected by the user for booking
  // Form group to handle the booking details
 
-  constructor(private taxiService:  BookingService, private fb: FormBuilder) {}
+  constructor(private taxiService:  BookingService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     // Fetch available taxis when the component loads
@@ -78,6 +79,8 @@ export class TaxibookingComponent {
       (response) => {
         console.log('Taxi booked successfully:', response);
         alert('Taxi booked successfully!');
+        this.router.navigate(['/bookinginfo']); // Redirect to the my bookingx
+       
         this.selectedTaxi = null;
         this.bookingForm.reset();
       },
