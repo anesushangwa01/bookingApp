@@ -3,15 +3,17 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { BookingService } from '../booking.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-taxibooking',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule, RouterModule],
   templateUrl: './taxibooking.component.html',
   styleUrl: './taxibooking.component.css'
 })
 export class TaxibookingComponent {
+  userInfo : any;
 
   bookingForm!: FormGroup;
   availableTaxis: any[] = []; // To store the list of available taxis
@@ -40,6 +42,17 @@ export class TaxibookingComponent {
       },
       (error) => {
         console.error('Error fetching available taxis:', error);
+      }
+    );
+
+
+    this.taxiService.getUserInfo().subscribe(
+      response => {
+        this.userInfo = response;
+        // console.log('User Info:', response);
+      },
+      (error: HttpErrorResponse) => {
+        // console.error('Error fetching user info:', error);
       }
     );
   }

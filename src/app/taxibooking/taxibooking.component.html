@@ -1,28 +1,41 @@
-
+<br><br><br>
 <div class="container">
-    <h2>Available Taxis</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Type of Car</th>
-          <th>Driver Name</th>
-          <th>Partnered Hotel</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let taxi of availableTaxis">
-          <td>{{ taxi.carType }}</td>
-          <td>{{ taxi.driverName }}</td>
-          <td>{{ taxi.hotelPartner }}</td>
-          <td>{{ taxi.status }}</td>
-          <td>
-            <button class="btn btn-primary" (click)="bookTaxi(taxi)">Book</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="!userInfo" class="alert alert-warning alert-dismissible text-center">
+    <a class="nav-link" [routerLink]="['/login']">Login required to start booking <br> click here</a>
+  </div>
+  <div *ngIf="userInfo"> 
+  <h2>Available Taxis</h2>
+
+  <!-- Display message if no taxis are available -->
+  <div  *ngIf="availableTaxis.length === 0 " class="alert alert-warning">
+    No taxis available.
+  </div>
+
+  <!-- Display table if there are available taxis -->
+  <table *ngIf="availableTaxis.length > 0" class="table table-striped"  >
+    <thead>
+      <tr>
+        <th>Type of Car</th>
+        <th>Driver Name</th>
+        <th>Partnered Hotel</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let taxi of availableTaxis">
+        <td>{{ taxi.carType }}</td>
+        <td>{{ taxi.driverName }}</td>
+        <td>{{ taxi.hotelPartner }}</td>
+        <td>{{ taxi.status }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="bookTaxi(taxi)">Book</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
   
     <!-- Booking Form -->
     <div *ngIf="selectedTaxi" class="container mt-5">
