@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 // http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'https://bookingback-01.onrender.com';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
