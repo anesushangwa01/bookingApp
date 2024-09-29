@@ -15,9 +15,10 @@
       <div class="navbar-nav me-auto">
         <a class="nav-link" [routerLink]="['/']" (click)="closeNavbar()">Home</a>
         <a class="nav-link" [routerLink]="['/categories']" (click)="closeNavbar()">Hotels</a>
+        <a class="nav-link" [routerLink]="['/taxi']" (click)="closeNavbar()">Taxi</a>
        
         <a class="nav-link"  [routerLink]="['/comming-soon']" (click)="closeNavbar()">Airplane</a>
-        <a class="nav-link" [routerLink]="['/taxi']" (click)="closeNavbar()">Taxi</a>
+      
         <a class="nav-link" [routerLink]="['/bookinginfo']" (click)="closeNavbar()">My bookings</a>
       </div>
 
@@ -25,9 +26,7 @@
         <app-google-auth></app-google-auth>
       </div>
 
-      <!-- <div class="navbar-nav ms-auto" *ngIf="!user">
-        <button type="button" class="btn btn-primary">Login with Google</button>
-      </div> -->
+  
     </div>
   </div>
 </nav>
