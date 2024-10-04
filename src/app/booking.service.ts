@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 // http://localhost:3000 https://bookingback-01.onrender.com
 export class BookingService {
-  private baseUrl = 'https://bookingback-01.onrender.com';
+  private baseUrl = ' https://bookingback-01.onrender.com';
 
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
@@ -45,6 +45,10 @@ export class BookingService {
   }
   resetPassword(resetData: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/register/reset-password`, resetData);
+  }
+
+  requestResetCode(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register/request-reset-password`, data);
   }
   
   getProtectedData(): Observable<any> {

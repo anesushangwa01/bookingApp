@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Forgot Password</h3>
+            <form [formGroup]="requestResetForm" (ngSubmit)="onRequestReset()">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input id="email" formControlName="email" class="form-control" />
+                <div *ngIf="requestResetForm.get('email')!.invalid && requestResetForm.get('email')!.touched" class="text-danger mt-1">
+                  A valid email is required
+                </div>
+              </div>
+              <button type="submit" class="btn w-100 bg" [disabled]="requestResetForm.invalid">
+                Request Reset Code
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

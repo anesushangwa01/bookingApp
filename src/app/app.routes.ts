@@ -17,6 +17,7 @@ import { MyaccountComponent} from './myaccount/myaccount.component'
 import { Component } from '@angular/core';
 import {TaxibookingComponent} from './taxibooking/taxibooking.component'
 import { PartnershipComponent } from './partnership/partnership.component';
+import {CodeResetComponent}  from './code-reset/code-reset.component'
 
 export const routes: Routes = [
 {path:'header', component: HeaderComponent},
@@ -35,7 +36,8 @@ export const routes: Routes = [
 {path: 'forbidden', component:  ForbiddenComponent},
 {path:'account', component:  MyaccountComponent},
 {path: 'taxi', component: TaxibookingComponent},
-{path: 'partners', component: PartnershipComponent}
+{path: 'partners', component: PartnershipComponent},
+{path: 'sendcode', component: CodeResetComponent}
 
 
 // , canActivate:[AuthGuard]

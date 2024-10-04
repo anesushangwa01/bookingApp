@@ -17,13 +17,14 @@ export class ResetpasswordComponent {
   successMessage: string = '';
   resetForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private bookingService: BookingService,
+  constructor(
+    private fb: FormBuilder,
+    private bookingService: BookingService,
     private router: Router
   ) {
     this.resetForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      favoriteMovie: ['', Validators.required],
-      favoriteCountry: ['', Validators.required],
+      resetCode: ['', Validators.required],
       newPassword: ['', Validators.required]
     });
   }
@@ -40,7 +41,7 @@ export class ResetpasswordComponent {
           }, 2000); // Wait 2 seconds before redirecting
         },
         error => {
-          this.errorMessage = 'Password reset failed. Please check your answers and try again.';
+          this.errorMessage = 'Password reset failed. Please check your reset code and try again.';
           this.successMessage = '';
           console.error('Reset error', error);
         }
