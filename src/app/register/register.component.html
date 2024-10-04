@@ -1,4 +1,3 @@
-
 <div class="container mt-5">
   <div *ngIf="errorMessage" class="error-message alert alert-danger">
     {{ errorMessage }}
@@ -30,27 +29,13 @@
                 Password is required
               </div>
             </div>
-             <strong> Note the information you enter below will be used to reset your password.</strong>
-            <div class="mb-3">
-              <label for="favoriteMovie" class="form-label">Favorite Movie:</label>
-              <input id="favoriteMovie" formControlName="favoriteMovie" class="form-control" />
-              <div *ngIf="registerForm.get('favoriteMovie')!.invalid && registerForm.get('favoriteMovie')!.touched" class="text-danger mt-1">
-                Favorite movie is required
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="favoriteCountry" class="form-label">Favorite Country:</label>
-              <input id="favoriteCountry" formControlName="favoriteCountry" class="form-control" />
-              <div *ngIf="registerForm.get('favoriteCountry')!.invalid && registerForm.get('favoriteCountry')!.touched" class="text-danger mt-1">
-                Favorite country is required
-              </div>
-            </div>
-            <button type="submit"  [disabled]="isLoading" class="btn w-100  btn-outline-primary" [disabled]="registerForm.invalid">
-              Register  <span *ngIf="isLoading" class="spinner"></span>
+            <button type="submit" class="btn w-100 btn-outline-primary" [disabled]="registerForm.invalid || isLoading">
+              Register
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             </button>
           </form>
           <div class="text-center mt-3">
-            <a class="nav-link" [routerLink]="['/login']">Click here to login if have an account</a>
+            <a class="nav-link" [routerLink]="['/login']">Click here to login if you already have an account</a>
           </div>
         </div>
       </div>

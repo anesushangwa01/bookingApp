@@ -21,8 +21,7 @@ export class RegisterComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      favoriteMovie: ['', Validators.required],
-      favoriteCountry: ['', Validators.required]
+  
     });
   }
 
