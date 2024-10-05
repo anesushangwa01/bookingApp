@@ -108,19 +108,13 @@ export class BookingService {
   }
   
 
-  getAllBooking(): Observable<any> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      // Handle the case where the token is not available
-      return throwError('Token not found');
-    }
-  
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get(`${this.baseUrl}/booking`, { headers })
-      .pipe(
-        catchError(this.handleError)
-      );
+  getAllBooking(): Observable<any[]> {
+    // No token required for this request, so we do not set Authorization header
+    return this.http.get<any[]>(`${this.baseUrl}/booking`).pipe(
+      catchError(this.handleError)
+    );
   }
+  
 
 
   addBooking(jobData: any): Observable<any> {

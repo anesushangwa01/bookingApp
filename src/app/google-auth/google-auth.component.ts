@@ -24,16 +24,29 @@ export class GoogleAuthComponent {
   constructor(private authService: BookingService, private router:Router) {}
 
   ngOnInit(): void {
-    this.authService.getUserInfo().subscribe(
-      response => {
-        this.userInfo = response;
-        // console.log('User Info:', response);
-      },
-      (error: HttpErrorResponse) => {
-        // console.error('Error fetching user info:', error);
-      }
-    );
+    const token = localStorage.getItem('token');
+  
+    // Only call getUserInfo if a token exists
+    if (token) {
+      this.authService.getUserInfo().subscribe(
+        response => {
+          this.userInfo = response;
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 403) {
+            console.error('Access forbidden. Redirecting to login.');
+            this.router.navigate(['/login']); // Redirect to login page
+          } else {
+            console.error('Error fetching user info:', error);
+          }
+        }
+      );
+    } else {
+      console.log('No token found. User is not authenticated.');
+      // Optionally redirect to login page or show a message
+    }
   }
+  
 
 
 

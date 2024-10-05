@@ -1,6 +1,7 @@
 <div class="navbar-nav ms-auto" *ngIf="userInfo">
     <div ngbDropdown class="d-inline-block">
       <button type="button" class="btn btn-outline-primary" id="dropdownUser" ngbDropdownToggle>
+        
         Welcome ,  {{ userInfo.name }}
       </button>
       <div ngbDropdownMenu aria-labelledby="dropdownUser" style="padding: 3px;">
