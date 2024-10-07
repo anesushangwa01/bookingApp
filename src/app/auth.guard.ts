@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     return this.bookingService.getUserInfo().pipe(
       map(user => {
         if (user) {
-          if (requiresAdmin && user.email !== 'admin@gmail.com') {
+          if (requiresAdmin && user.email !== 'anesushangwa01@gmail.com') {
             // User is not an admin, redirect to a forbidden or home page
             this.router.navigate(['/forbidden']);
             return false;
