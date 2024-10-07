@@ -1,75 +1,77 @@
- <div class="container">
-<h2>MY booking</h2>
-<div *ngIf="showMessage" class="alert alert-success alert-dismissible">
-  {{ successMessage }}
-  <button type="button" class="close btn" aria-label="Close" (click)="closeMessage()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<app-myaccount></app-myaccount>
-<div *ngIf="isLoading" class="loading-spinner">
-        
-  <p>Loading...</p>
-</div>
-<div *ngIf="bookings.length > 0; else noBookings    !isLoading" >
-  <table class="table table-striped table-bordered">
-    <thead class="thead-dark">
-      <tr>
-        <th>Guest Name</th>
-    
-        <th>Hotel Name</th>
-        <th>Check-in Date</th>
-        <th>Check-out Date</th>
-        <th>Number of Guests</th>
-        <th>Room Type</th>
-  
-        <th>Special Requests</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let booking of bookings">
-        <td>{{ booking.firstName }}</td>
-        <!-- <td>{{ booking.lastName }}</td> -->
-        <td>{{ booking.hotelName }}</td>
-        <td>{{ booking.checkInDate | date }}</td>
-        <td>{{ booking.checkOutDate | date }}</td>
-        <td>{{ booking.numberOfGuests }}</td>
-        <td>{{ booking.roomType }}</td>
+<div class="container">
+  <h2>MY booking</h2>
 
-        <td>{{ booking.specialRequests }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="showMessage" class="alert alert-success alert-dismissible">
+    {{ successMessage }}
+    <button type="button" class="close btn" aria-label="Close" (click)="closeMessage()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
-<div *ngIf="isLoading">Loading...</div>
+  <app-myaccount></app-myaccount>
 
-<table *ngIf="!isLoading && bookingtax.length > 0" class="table table-striped">
-  <thead>
-    <tr>
-      <th>Car</th>
-      <th>From Location</th>
-      <th>To Location</th>
-      <th>Pickup Time</th>
-      <th>Driver Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let booking of bookingtax">
-      <td>{{ booking.
-carType || 'N/A' }}</td>
-      <td>{{ booking.fromLocation }}</td>
-      <td>{{ booking.toLocation }}</td>
-      <td>{{ booking.pickupTime | date:'short' }}</td>
-      <td>{{ booking.
-driverName || 'N/A' }}</td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="isLoading" class="loading-spinner">
+    <p>Loading...</p>
+  </div>
 
-<div *ngIf="!isLoading && bookingtax.length === 0">No taxi bookings  available.</div>
+  <div *ngIf="bookings.length > 0; else noBookings  !isLoading">
+    <!-- Wrap the table with table-responsive for smaller screens -->
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Guest Name</th>
+            <th>Hotel Name</th>
+            <th>Check-in Date</th>
+            <th>Check-out Date</th>
+            <th>Number of Guests</th>
+            <th>Room Type</th>
+            <th>Special Requests</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookings">
+            <td>{{ booking.firstName }}</td>
+            <td>{{ booking.hotelName }}</td>
+            <td>{{ booking.checkInDate | date }}</td>
+            <td>{{ booking.checkOutDate | date }}</td>
+            <td>{{ booking.numberOfGuests }}</td>
+            <td>{{ booking.roomType }}</td>
+            <td>{{ booking.specialRequests }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<ng-template #noBookings  >
-  <p > No bookings found you.</p>
-</ng-template>
+  <div *ngIf="isLoading">Loading...</div>
+
+  <div *ngIf="!isLoading && bookingtax.length > 0" class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Car</th>
+          <th>From Location</th>
+          <th>To Location</th>
+          <th>Pickup Time</th>
+          <th>Driver Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookingtax">
+          <td>{{ booking.carType || 'N/A' }}</td>
+          <td>{{ booking.fromLocation }}</td>
+          <td>{{ booking.toLocation }}</td>
+          <td>{{ booking.pickupTime | date:'short' }}</td>
+          <td>{{ booking.driverName || 'N/A' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!isLoading && bookingtax.length === 0">No taxi bookings available.</div>
+
+  <ng-template #noBookings>
+    <p>No bookings found for you.</p>
+  </ng-template>
 </div>
