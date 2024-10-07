@@ -36,7 +36,7 @@ height: 70vh;
 
   p {
     /* font-size: 1.5em; */
-    color: #111B21;
+    color: black;
   
   }
   .bcl{
@@ -58,7 +58,7 @@ border-bottom-right-radius: 70px;
     
   }
   .cover2{
-    background-color: #0005;
+    background-color: #0007;
     height: 70vh;
   }
 
@@ -111,11 +111,11 @@ border-bottom-right-radius: 70px;
 .btn-link {
     font-size: 1rem;
     text-decoration: underline;
-    color: green;
+
 }
 
 h2{
-  color: #111B21;
+  color: black;
 }
 .fade-in {
   opacity: 0;
@@ -129,7 +129,7 @@ h2{
 @media (max-width: 600px) {
 
   .bcl{padding: 10px;
-   background-color: #111B21;
+   background-color: black;
   }
   
 }

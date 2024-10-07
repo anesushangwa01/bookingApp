@@ -22,7 +22,7 @@
   section.listing a {
     padding-left: 20px;
     text-decoration: none;
-    color: var(--primary-color);
+   
   }
   section.listing a::after {
     content: "\203A";
@@ -49,7 +49,7 @@
     
     
     input[type="text"] {
-      border: solid 1px #ccc;
+      border: solid 1px black;
       padding: 10px;
       border-radius: 8px;
       margin-right: 4px;

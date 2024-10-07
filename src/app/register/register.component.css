@@ -1,6 +1,6 @@
 
 .spinner {
-    border: 2px solid #f3f3f3;
+    border: 2px solid white;
     border-radius: 50%;
     border-top: 2px solid #000;
     width: 12px;
@@ -13,4 +13,8 @@
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+  .bg{
+    background-color: black;
+    color: white;
   }
