@@ -4,16 +4,16 @@
         
         Welcome ,  {{ userInfo.name }}
       </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownUser" style="padding: 3px;">
+      <div ngbDropdownMenu aria-labelledby="dropdownUser" style="padding: 3px;" [ngbCollapse]="isCollapsed">
         <p>{{ userInfo.email }}</p>
         <button (click)="logout()">Logout</button>
-        <a class="nav-link " [routerLink]="['/admin']">Admin</a>
-        <a class="nav-link " [routerLink]="['/account']">myAcoount</a>
+        <a class="nav-link " [routerLink]="['/admin']" (click)="closeNavbar()">Admin</a>
+        <a class="nav-link " [routerLink]="['/account'] " (click)="closeNavbar()">myAcoount</a>
   
       </div>
     </div>
   </div>
 
-  <div *ngIf="!userInfo">
-    <a class="nav-link  "   [routerLink]="['/login']">Login</a>
+  <div *ngIf="!userInfo"  >
+    <a class="nav-link  "   [routerLink]="['/login'] " (click)="closeNavbar()">Login</a>
   </div>

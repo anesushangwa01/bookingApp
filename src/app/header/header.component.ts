@@ -15,6 +15,7 @@ import { GoogleAuthComponent } from '../google-auth/google-auth.component';
 })
 export class HeaderComponent {
   user: any;
+
   isCollapsed = true;
   constructor(private bookingService: BookingService) {}
   

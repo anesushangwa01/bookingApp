@@ -26,11 +26,17 @@ export class CodeResetComponent {
     if (this.requestResetForm.valid) {
       this.bookingService.requestResetCode(this.requestResetForm.value).subscribe(
         response => {
-          this.successMessage = 'Reset code sent to your email. Check your inbox!';
+          // Display success message immediately
+          this.successMessage = 'Reset code sent to your email. Check your inbox! or your spam folder';
           this.errorMessage = '';
-          this.router.navigate(['/reset']);
+  
+          // Delay the redirection by 5 seconds (5000 milliseconds)
+          setTimeout(() => {
+            this.router.navigate(['/reset']);
+          }, 5000);
         },
         error => {
+          // Handle error without delay
           this.errorMessage = 'Failed to send reset code. Please try again.';
           this.successMessage = '';
           console.error('Error requesting reset code', error);
@@ -38,5 +44,6 @@ export class CodeResetComponent {
       );
     }
   }
+  
 
 }

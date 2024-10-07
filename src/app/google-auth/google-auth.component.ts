@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class GoogleAuthComponent {
 
-
+  isCollapsed = true;
   
 
 
@@ -22,6 +22,10 @@ export class GoogleAuthComponent {
   userInfo: any;
 
   constructor(private authService: BookingService, private router:Router) {}
+
+  closeNavbar() {
+    this.isCollapsed = true;
+  }
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
