@@ -1,122 +1,109 @@
-<br><br><br>
-<div class="container">
+<div class="container mt-5">
   <div *ngIf="!userInfo" class="alert alert-warning alert-dismissible text-center">
     <a class="nav-link" [routerLink]="['/login']">Login required to start booking <br> click here</a>
   </div>
-  <div *ngIf="userInfo"> 
-  <h2>Available Taxis</h2>
-
-  <!-- Display message if no taxis are available -->
-  <div  *ngIf="availableTaxis.length === 0 " class="alert alert-warning">
-    No taxis available.
-  </div>
-
-  <!-- Display table if there are available taxis -->
-  <table *ngIf="availableTaxis.length > 0" class="table table-striped"  >
-    <thead>
-      <tr>
-        <th>Type of Car</th>
-        <th>Driver Name</th>
-        <th>Partnered Hotel</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let taxi of availableTaxis">
-        <td>{{ taxi.carType }}</td>
-        <td>{{ taxi.driverName }}</td>
-        <td>{{ taxi.hotelPartner }}</td>
-        <td> Available<td>
-        <td>
-          <button class="btn bg" (click)="bookTaxi(taxi)">Book</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
   
-    <!-- Booking Form -->
-    <div *ngIf="selectedTaxi" class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title text-center mb-4">Book Taxi</h3>
-    
-              <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
-                <!-- From Location -->
-                <div class="mb-3">
-                  <label for="fromLocation" class="form-label">From</label>
-                  <input
-                    id="fromLocation"
-                    formControlName="fromLocation"
-                    class="form-control"
-                    placeholder="Enter your start location"
-                  />
-                  <div
-                    *ngIf="bookingForm.controls['fromLocation'].invalid && bookingForm.controls['fromLocation'].touched"
-                    class="text-danger mt-1"
-                  >
-                    Start location is required
-                  </div>
-                </div>
-    
-                <!-- To Location -->
-                <div class="mb-3">
-                  <label for="toLocation" class="form-label">To</label>
-                  <input
-                    id="toLocation"
-                    formControlName="toLocation"
-                    class="form-control"
-                    placeholder="Enter your destination"
-                  />
-                  <div
-                    *ngIf="bookingForm.controls['toLocation'].invalid && bookingForm.controls['toLocation'].touched"
-                    class="text-danger mt-1"
-                  >
-                    Destination is required
-                  </div>
-                </div>
-    
-                <!-- Pickup Time -->
-                <div class="mb-3">
-                  <label for="pickupTime" class="form-label">Pickup Time</label>
-                  <input
-                    id="pickupTime"
-                    type="datetime-local"
-                    formControlName="pickupTime"
-                    class="form-control"
-                  />
-                  <div
-                    *ngIf="bookingForm.controls['pickupTime'].invalid && bookingForm.controls['pickupTime'].touched"
-                    class="text-danger mt-1"
-                  >
-                    Pickup time is required
-                  </div>
-                </div>
-    
-                <!-- Taxi Details -->
-                <h4 class="text-center mt-4">
-                  Booking Taxi: {{ selectedTaxi.driverName }} ({{ selectedTaxi.carType }})
-                </h4>
-    
-                <!-- Confirm Booking Button -->
-                <div class="text-center mt-4">
-                  <button
-                    type="submit"
-                    class="btn btn-outline-success w-100"
-                    [disabled]="bookingForm.invalid"
-                  >
-                    Confirm Booking
-                  </button>
-                </div>
-              </form>
+  <div *ngIf="userInfo"> 
+    <h2>Available Taxis</h2>
+
+    <!-- Display message if no taxis are available -->
+    <div *ngIf="availableTaxis.length === 0" class="alert alert-warning">
+      No taxis available.
+    </div>
+
+    <!-- Make the table responsive for small and medium screens -->
+    <div class="table-responsive">
+      <table *ngIf="availableTaxis.length > 0" class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Type of Car</th>
+            <th>Driver Name</th>
+            <th>Partnered Hotel</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let taxi of availableTaxis">
+            <td>{{ taxi.carType }}</td>
+            <td>{{ taxi.driverName }}</td>
+            <td>{{ taxi.hotelPartner }}</td>
+            <td>Available</td>
+            <td>
+              <button class="btn btn-success" (click)="bookTaxi(taxi)">Book</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Form -->
+<div *ngIf="selectedTaxi" class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Book Taxi</h3>
+
+          <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
+            <!-- From Location -->
+            <div class="mb-3">
+              <label for="fromLocation" class="form-label">From</label>
+              <input
+                id="fromLocation"
+                formControlName="fromLocation"
+                class="form-control"
+                placeholder="Enter your start location"
+              />
+              <div *ngIf="bookingForm.controls['fromLocation'].invalid && bookingForm.controls['fromLocation'].touched" class="text-danger mt-1">
+                Start location is required
+              </div>
             </div>
-          </div>
+
+            <!-- To Location -->
+            <div class="mb-3">
+              <label for="toLocation" class="form-label">To</label>
+              <input
+                id="toLocation"
+                formControlName="toLocation"
+                class="form-control"
+                placeholder="Enter your destination"
+              />
+              <div *ngIf="bookingForm.controls['toLocation'].invalid && bookingForm.controls['toLocation'].touched" class="text-danger mt-1">
+                Destination is required
+              </div>
+            </div>
+
+            <!-- Pickup Time -->
+            <div class="mb-3">
+              <label for="pickupTime" class="form-label">Pickup Time</label>
+              <input
+                id="pickupTime"
+                type="datetime-local"
+                formControlName="pickupTime"
+                class="form-control"
+              />
+              <div *ngIf="bookingForm.controls['pickupTime'].invalid && bookingForm.controls['pickupTime'].touched" class="text-danger mt-1">
+                Pickup time is required
+              </div>
+            </div>
+
+            <!-- Taxi Details -->
+            <h4 class="text-center mt-4">
+              Booking Taxi: {{ selectedTaxi.driverName }} ({{ selectedTaxi.carType }})
+            </h4>
+
+            <!-- Confirm Booking Button -->
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-outline-success w-100" [disabled]="bookingForm.invalid">
+                Confirm Booking
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    
-  
+  </div>
+</div>
