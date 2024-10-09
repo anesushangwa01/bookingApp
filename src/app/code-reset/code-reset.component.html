@@ -18,8 +18,9 @@
                   A valid email is required
                 </div>
               </div>
-              <button type="submit" class="btn w-100 bg" [disabled]="requestResetForm.invalid">
+              <button type="submit" class="btn w-100 bg" [disabled]="requestResetForm.invalid || isLoading">
                 Request Reset Code
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               </button>
             </form>
           </div>

@@ -16,6 +16,7 @@ export class ResetpasswordComponent {
   errorMessage: string = '';
   successMessage: string = '';
   resetForm: FormGroup;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +32,7 @@ export class ResetpasswordComponent {
 
   onSubmit() {
     if (this.resetForm.valid) {
+      this.isLoading = true; 
       this.bookingService.resetPassword(this.resetForm.value).subscribe(
         response => {
           console.log('Password reset successful', response);
@@ -43,6 +45,7 @@ export class ResetpasswordComponent {
         error => {
           this.errorMessage = 'Password reset failed. Please check your reset code and try again.';
           this.successMessage = '';
+          this.isLoading = false;
           console.error('Reset error', error);
         }
       );
